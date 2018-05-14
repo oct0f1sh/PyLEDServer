@@ -3,7 +3,7 @@ import time
 from PIL import ImageColor
 
 class LEDStrip(object):
-    def __init__(self, led_pin, led_count):
+    def __init__(self, LED_PIN, LED_COUNT):
         LED_FREQ_HZ    = 800000  # LED signal frequency in hertz (usually 800khz)
         LED_DMA        = 10      # DMA channel to use for generating signal (try 10)
         LED_BRIGHTNESS = 255     # Set to 0 for darkest and 255 for brightest
@@ -17,7 +17,7 @@ class LEDStrip(object):
 
         self.test_strip()
 
-    def test_strip():
+    def test_strip(self):
         strip = self.strip
 
         for i in range(strip.numPixels()):
