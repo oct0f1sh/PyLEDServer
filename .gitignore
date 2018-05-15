@@ -102,4 +102,4 @@ venv.bak/
 
 # mypy
 .mypy_cache/
-user_info.txt
+#user_info.txt
