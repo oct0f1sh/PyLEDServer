@@ -1,7 +1,5 @@
 #!python2
 
-# DO NOT RUN AS SUPERUSER
-
 import paho.mqtt.client as mqtt
 import os
 from neopixel import Color
@@ -41,14 +39,11 @@ class MqttInfo(object):
                 if '\#\#' not in line:
                     info = line.split('=')
                     if info[0] == 'mqtt_url':
-                        print('got mqtt url: {}'.format(info[1]))
-                        self.mqtt_url = info[1]
+                        self.mqtt_url = info[1][:-1]
                     elif info[0] == 'mqtt_username':
-                        print('got mqtt username: {}'.format(info[1]))
-                        self.mqtt_username = info[1]
+                        self.mqtt_username = info[1][:-1]
                     elif info[0] == 'mqtt_password':
-                        print('got mqtt password: {}'.format(info[1]))
-                        self.mqtt_password = info[1]
+                        self.mqtt_password = info[1][:-1]
 
 if __name__ == '__main__':
     user_info = MqttInfo()
