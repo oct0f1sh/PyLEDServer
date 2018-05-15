@@ -1,9 +1,0 @@
-## INSERT YOUR MQTT INFO HERE WITH NO SPACES
-mqtt_url=
-mqtt_username=
-mqtt_password=
-
-## EXAMPLE
-## mqtt_url=test.mqtt.com
-## mqtt_username=testname
-## mqtt_password=mqttpassword
