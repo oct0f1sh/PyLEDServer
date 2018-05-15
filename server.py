@@ -34,14 +34,30 @@ def on_publish(client, obj, mid):
 def on_subscribe(client, obj, mid, granted_qos):
     print('Subscribed to topic' + divider)
 
+class MqttInfo(object):
+    def __init__(self):
+        with open('user_info.txt', 'r', encoding='utf8') as f:
+            for line in f:
+                if '\#\#' not in line:
+                    info = line.split('=')
+                    if info[0] == 'mqtt_url':
+                        print('got mqtt url: {}'.format(info[1]))
+                        self.mqtt_url = info[1]
+                    elif info[0] == 'mqtt_username':
+                        print('got mqtt username: {}'.format(info[1]))
+                        self.mqtt_username = info[1]
+                    elif info[0] == 'mqtt_password':
+                        print('got mqtt password: {}'.format(info[1]))
+                        self.mqtt_password = info[1]
+
 if __name__ == '__main__':
-    mqtt_host = os.environ.get('MQTT_URL')
+    user_info = MqttInfo()
+
+    mqtt_host = user_info.mqtt_url
     mqtt_port = 10820
 
-    mqtt_username = os.environ.get('MQTT_USERNAME')
-    print(mqtt_username)
-    mqtt_password = os.environ.get('MQTT_PASSWORD')
-    print(mqtt_password)
+    mqtt_username = user_info.mqtt_username
+    mqtt_password = user_info.mqtt_password
 
     client = mqtt.Client()
     client.on_message = on_message
