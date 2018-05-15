@@ -2,6 +2,7 @@
 
 import paho.mqtt.client as mqtt
 import os
+import json
 from neopixel import Color
 from LEDStrip import LEDStrip
 
@@ -17,6 +18,15 @@ def on_connect(client, userdata, flags, rc):
 
 def on_message(client, obj, msg):
     message = msg.payload.decode("utf-8")
+
+    try:
+        message = json.loads(message)
+
+        print(message + divider)
+        print(message['message'])
+    except ValueError:
+        print('MISSING DELIMITER IN JSON')
+
     print('Message received from topic: {}\n\"{}\"'.format(msg.topic, message) + divider)
 
     if 'test strip' in message:
@@ -54,7 +64,7 @@ if __name__ == '__main__':
     mqtt_username = user_info.mqtt_username
     mqtt_password = user_info.mqtt_password
 
-    print('url: {}\nusername: {}\npassword: {}{}'.format(mqtt_host, mqtt_username, mqtt_password, divider))
+    print('url: {}\nusername: {}\npassword: {}'.format(mqtt_host, mqtt_username, mqtt_password) + divider)
 
     client = mqtt.Client()
     client.on_message = on_message
