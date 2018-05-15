@@ -1,5 +1,7 @@
 #!python3
 
+# DO NOT RUN AS SUPERUSER
+
 import paho.mqtt.client as mqtt
 import os
 
@@ -26,7 +28,9 @@ if __name__ == '__main__':
     mqtt_port = 10820
 
     mqtt_username = os.environ.get('MQTT_USERNAME')
+    print(mqtt_username)
     mqtt_password = os.environ.get('MQTT_PASSWORD')
+    print(mqtt_password)
 
     client = mqtt.Client()
     client.on_message = on_message
