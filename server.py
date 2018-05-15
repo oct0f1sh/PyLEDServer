@@ -36,7 +36,7 @@ def on_subscribe(client, obj, mid, granted_qos):
 
 class MqttInfo(object):
     def __init__(self):
-        with open('user_info.txt', 'r', encoding='utf8') as f:
+        with open('user_info.txt', 'r') as f:
             for line in f:
                 if '\#\#' not in line:
                     info = line.split('=')
