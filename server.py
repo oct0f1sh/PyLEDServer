@@ -21,8 +21,6 @@ def on_message(client, obj, msg):
 
     try:
         message = json.loads(message)
-
-        print(message + divider)
         print(message['message'])
     except ValueError:
         print('MISSING DELIMITER IN JSON')
