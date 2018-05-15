@@ -17,10 +17,10 @@ def on_connect(client, userdata, flags, rc):
         print('Failed to connect with rc: {}'.format(rc) + divider)
 
 def on_message(client, obj, msg):
-    message = msg.payload.decode("utf-8")
+    # message = msg.payload.decode("utf-8")
 
     try:
-        message = json.loads(message)
+        message = json.loads(msg.payload)
         print(message['message'])
     except ValueError:
         print('MISSING DELIMITER IN JSON')
