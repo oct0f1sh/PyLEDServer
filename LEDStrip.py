@@ -17,8 +17,6 @@ class LEDStrip(object):
 
         self.strip.begin()
 
-        self.test_strip()
-
     def test_strip(self):
         strip = self.strip
 
