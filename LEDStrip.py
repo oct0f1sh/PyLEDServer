@@ -32,5 +32,13 @@ class LEDStrip(object):
 
         strip.show()
 
+    def set_solid(self, color):
+        strip = self.strip
+
+        for i in range(strip.numPixels()):
+            strip.setPixelColor(i, color)
+        
+        strip.show()
+
 if __name__ == '__main__':
     led_strip = LEDStrip(18, 60)
