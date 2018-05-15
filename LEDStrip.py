@@ -1,3 +1,5 @@
+#!python3
+
 from neopixel import *
 import time
 from PIL import ImageColor
