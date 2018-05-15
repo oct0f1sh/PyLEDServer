@@ -1,3 +1,0 @@
-mqtt_url=test
-mqtt_username=test
-mqtt_password=test
