@@ -1,4 +1,4 @@
-#!python3
+#!python2
 
 from neopixel import *
 import time
