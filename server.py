@@ -25,11 +25,13 @@ def on_message(client, obj, msg):
 
     print('Message received from topic: {}\n{}'.format(msg.topic, message) + divider)
 
-    if 'test strip' in message:
+    payload = message['message']
+
+    if 'test strip' in payload:
         led_strip.test_strip()
-    if 'clear' in message:
+    if 'clear' in payload:
         led_strip.set_solid(Color(0, 0, 0))
-    if 'blue' in message:
+    if 'blue' in payload:
         led_strip.set_solid(Color(0, 0, 255))
 
 def on_publish(client, obj, mid):
