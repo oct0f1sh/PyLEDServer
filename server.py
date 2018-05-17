@@ -20,7 +20,7 @@ def on_message(client, obj, msg):
     message = msg.payload.decode("utf-8")
 
     try:
-        message = json.loads(message.payload)
+        message = json.loads(message)
         print(message['message'])
     except ValueError:
         print('MISSING DELIMITER IN JSON')
