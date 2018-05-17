@@ -23,7 +23,7 @@ def on_message(client, obj, msg):
         print('JSON ERROR: {}'.format(err))
         return
 
-    print('Message received from topic: {}\n{}'.format(msg.topic, json.dumps(message)) + divider)
+    print('Message received from topic: {}\n{}'.format(msg.topic, json.dumps(message, indent=4, separators=(',', ': '))) + divider)
 
     payload = message['message']
 
