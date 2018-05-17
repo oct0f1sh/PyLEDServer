@@ -18,12 +18,12 @@ def on_connect(client, userdata, flags, rc):
 
 def on_message(client, obj, msg):
     try:
-        message = json.dumps(msg.payload)
+        message = json.loads(msg.payload)
     except ValueError as err:
         print('JSON ERROR: {}'.format(err))
         return
 
-    print('Message received from topic: {}\n{}'.format(msg.topic, message) + divider)
+    print('Message received from topic: {}\n{}'.format(msg.topic, json.dumps(message)) + divider)
 
     payload = message['message']
 
