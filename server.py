@@ -23,7 +23,7 @@ def on_message(client, obj, msg):
         print('JSON ERROR: {}'.format(err))
         return
 
-    print('Message received from topic: {}\n\"{}\"'.format(msg.topic, message) + divider)
+    print('Message received from topic: {}\n{}'.format(msg.topic, message) + divider)
 
     if 'test strip' in message:
         led_strip.test_strip()
