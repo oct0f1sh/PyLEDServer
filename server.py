@@ -19,11 +19,11 @@ def on_connect(client, userdata, flags, rc):
 def on_message(client, obj, msg):
     message = msg.payload.decode("utf-8")
 
-    try:
-        message = json.loads(message)
-        print(message['message'])
-    except ValueError:
-        print('MISSING DELIMITER IN JSON')
+##    try:
+    message = json.dumps(msg.payload)
+    print(message)
+##    except ValueError as err:
+##        print('MISSING DELIMITER IN JSON: {}'.format(err))
 
     print('Message received from topic: {}\n\"{}\"'.format(msg.topic, message) + divider)
 
