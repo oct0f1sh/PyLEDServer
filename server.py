@@ -72,6 +72,8 @@ if __name__ == '__main__':
     client.connect(mqtt_host, mqtt_port)
     client.subscribe('test', 0)
 
-    client.publish('test', json.dumps({'message': 'successfully started client'}))
+    success_message = {'message': 'successfully started client'}
+
+    client.publish('test', json.dumps(success_message, ensure_ascii=True))
 
     client.loop_forever()
