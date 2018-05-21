@@ -20,12 +20,13 @@ def on_message(client, obj, msg):
     try:
         message = json.loads(msg.payload)
     except ValueError as err:
-        print('JSON ERROR: {}'.format(err))
+        print('JSON ERROR: {}'.format(err) + divider)
         return
 
     print('Message received from topic: {}\n{}'.format(msg.topic, json.dumps(message, indent=4, separators=(',', ': '))) + divider)
 
     payload = message['message']
+    args = message['args']
 
     if 'test strip' in payload:
         led_strip.test_strip()
@@ -33,11 +34,18 @@ def on_message(client, obj, msg):
         led_strip.set_solid(Color(0, 0, 0))
     if 'blue' in payload:
         led_strip.set_solid(Color(0, 0, 255))
+    if 'solid_color' in payload:
+        input_color = Color(int(args['r']),
+                            int(args['g']),
+                            int(args['b']))
+
+        led_strip.set_solid(input_color)
+        
 
 def on_publish(client, obj, mid):
     print('Message published.' + divider)
 
-def on_subscribe(client, obj, mid, granted_qos):
+def on_subscribe(client, obj, mid, granted_qos):te
     print('Subscribed to topic' + divider)
 
 class MqttInfo(object):
