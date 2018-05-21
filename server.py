@@ -30,7 +30,7 @@ def on_message(client, obj, msg):
     try:
         interpret_message(message) 
     except KeyError:
-        print(divider)
+        print(divider[1:])
         return
     
     print(divider)
