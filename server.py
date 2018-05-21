@@ -58,7 +58,8 @@ def interpret_message(json):
         
         print(args)
         print(type(args))
-        if args is not dict:
+
+        if type(args) is not dict:
             raise KeyError('ARGS MUST BE OF TYPE DICTIONARY')
     except KeyError:
         print('MISSING DICTIONARY ARGS ARGUMENT IN JSON')
