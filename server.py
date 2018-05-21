@@ -25,12 +25,15 @@ def on_message(client, obj, msg):
         print('JSON ERROR: {}'.format(err) + divider)
         return
 
-    print('Message received from topic: {}\n{}'.format(msg.topic, json.dumps(message, indent=4, separators=(',', ': '))) + divider)
+    print('Message received from topic: {}\n{}'.format(msg.topic, json.dumps(message, indent=4, separators=(',', ': '))))
 
     try:
         interpret_message(message) 
     except KeyError:
+        print(divider)
         return
+    
+    print(divider)
 
     payload = message['message']
     args = message['args']

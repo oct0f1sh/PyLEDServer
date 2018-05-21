@@ -1,4 +1,5 @@
 from neopixel import Color
+import json
 
 class LEDSolidColorModule(object):
     """ sets strip to one solid color """
@@ -10,6 +11,8 @@ class LEDSolidColorModule(object):
         }
     """
     def __init__(self, led_strip, json_args):
+        json_args = json.loads(json_args)
+        
         # TODO: TRY / CATCH for non Int rgb arguments
         r = int(json_args['r'])
         g = int(json_args['g'])
