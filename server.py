@@ -45,7 +45,7 @@ def on_message(client, obj, msg):
 def on_publish(client, obj, mid):
     print('Message published.' + divider)
 
-def on_subscribe(client, obj, mid, granted_qos):te
+def on_subscribe(client, obj, mid, granted_qos):
     print('Subscribed to topic' + divider)
 
 class MqttInfo(object):
