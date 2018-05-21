@@ -3,14 +3,25 @@
 import paho.mqtt.client as mqtt
 import os
 import json
-from neopixel import Color
-from LEDStrip import LEDStrip
+import sys
+
+try:
+    from neopixel import Color
+except ImportError:
+    from debugColor import Color
 
 from ledsolidcolormodule import LEDSolidColorModule
 
 divider = '\n------------------'
 
-led_strip = LEDStrip(18, 60)
+if len(sys.argv) > 1 and sys.argv[1] != '--debug':
+    print('NORMAL MODE' + divider)
+    from LEDStrip import LEDStrip
+    led_strip = LEDStrip(18, 60)
+else:
+    print('DEBUG MODE' + divider)
+    from LEDStrip import DebugLEDStrip
+    led_strip = DebugLEDStrip()
 
 def on_connect(client, userdata, flags, rc):
     if rc == 0:

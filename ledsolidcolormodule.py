@@ -1,4 +1,7 @@
-from neopixel import Color
+try:
+    from neopixel import Color
+except ImportError:
+    from debugColor import Color
 import json
 
 class LEDSolidColorModule(object):
@@ -12,6 +15,7 @@ class LEDSolidColorModule(object):
     """
     def __init__(self, led_strip, json_args):
         print(json_args)
+
         json_args = json.loads(json_args)
 
         # TODO: TRY / CATCH for non Int rgb arguments

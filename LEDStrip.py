@@ -1,6 +1,9 @@
 #!python2
 
-from neopixel import *
+try:
+    from neopixel import *
+except ImportError:
+    from debugColor import Color
 import time
 from PIL import ImageColor
 
@@ -39,6 +42,16 @@ class LEDStrip(object):
             strip.setPixelColor(i, color)
         
         strip.show()
+
+class DebugLEDStrip(object):
+    def __init__(self):
+        pass
+
+    def test_strip(self):
+        pass
+    
+    def set_solid(self, color):
+        pass
 
 if __name__ == '__main__':
     led_strip = LEDStrip(18, 60)
