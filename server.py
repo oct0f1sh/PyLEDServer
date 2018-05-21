@@ -6,6 +6,8 @@ import json
 from neopixel import Color
 from LEDStrip import LEDStrip
 
+from ledsolidcolormodule import LEDSolidColorModule
+
 divider = '\n------------------'
 
 led_strip = LEDStrip(18, 60)
@@ -25,6 +27,11 @@ def on_message(client, obj, msg):
 
     print('Message received from topic: {}\n{}'.format(msg.topic, json.dumps(message, indent=4, separators=(',', ': '))) + divider)
 
+    try:
+        interpret_message(message) 
+    except KeyError:
+        return
+
     payload = message['message']
     args = message['args']
 
@@ -35,11 +42,19 @@ def on_message(client, obj, msg):
     if 'blue' in payload:
         led_strip.set_solid(Color(0, 0, 255))
     if 'solid_color' in payload:
-        input_color = Color(int(args['r']),
-                            int(args['g']),
-                            int(args['b']))
+        LEDSolidColorModule(led_strip, args)
 
-        led_strip.set_solid(input_color)
+def interpret_message(json):
+    try:
+        _ = json['message']
+    except KeyError:
+        print('MISSING MESSAGE ARGUMENT IN JSON')
+        raise
+    try:
+        _ = json['args']
+    except KeyError:
+        print('MISSING ARGS ARGUMENT IN JSON')
+        raise
         
 
 def on_publish(client, obj, mid):
