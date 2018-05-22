@@ -14,6 +14,8 @@ class LEDSolidColorModule(object):
         }
     """
     def __init__(self, led_strip, json_args):
+        duration = 0
+
         try:
             r = int(json_args['r'])
             g = int(json_args['g'])
@@ -24,12 +26,11 @@ class LEDSolidColorModule(object):
 
         try:
             duration = int(json_args['duration'])
-        except ValueError, KeyError:
+        except KeyError, ValueError as err:
             print('LEDSolidColorModule - INVALID DURATION VALUE: {}'.format(err))
-            duration = 0
 
         self.led_strip = led_strip
-
+ 
         # Check that all rgb values are less than 255
         if r < 256:
             self.r = r
