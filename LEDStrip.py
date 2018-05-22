@@ -45,7 +45,7 @@ class LEDStrip(object):
 
         sleep_duration = duration / strip.numPixels()
 
-        print('sleep duration between LEDs: {}'.format(sleep))
+        print('sleep duration between LEDs: {}'.format(sleep_duration))
 
         for i in range(strip.numPixels()):
             strip.setPixelColor(i, color)
