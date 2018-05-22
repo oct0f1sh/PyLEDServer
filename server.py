@@ -14,7 +14,7 @@ from ledsolidcolormodule import LEDSolidColorModule
 
 divider = '\n------------------'
 
-if len(sys.argv) > 1 and sys.argv[1] != '--debug':
+if len(sys.argv) >= 1 and '--debug' not in sys.argv:
     print('NORMAL MODE' + divider)
     from LEDStrip import LEDStrip
     led_strip = LEDStrip(18, 60)
@@ -44,7 +44,7 @@ def on_message(client, obj, msg):
         print(divider[1:])
         return
     
-    print(divider)
+    print(divider[1:])
 
     payload = message['message']
     args = message['args']
@@ -66,9 +66,6 @@ def interpret_message(json):
         raise
     try:
         args = json['args']
-        
-        print(args)
-        print(type(args))
 
         if type(args) is not dict:
             raise KeyError('ARGS MUST BE OF TYPE DICTIONARY')
@@ -117,7 +114,8 @@ if __name__ == '__main__':
     client.connect(mqtt_host, mqtt_port)
     client.subscribe('test', 0)
 
-    success_message = {'message': 'successfully started client'}
+    success_message = {'message': 'successfully started client',
+                       'args': {}}
 
     client.publish('test', json.dumps(success_message, ensure_ascii=True))
 

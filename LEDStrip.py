@@ -7,6 +7,8 @@ except ImportError:
 import time
 from PIL import ImageColor
 
+divider = '\n------------------'
+
 class LEDStrip(object):
     def __init__(self, LED_PIN, LED_COUNT):
         LED_FREQ_HZ    = 800000  # LED signal frequency in hertz (usually 800khz)
@@ -48,10 +50,10 @@ class DebugLEDStrip(object):
         pass
 
     def test_strip(self):
-        pass
+        print('DEBUG MODE: testing LED strip' + divider)
     
     def set_solid(self, color):
-        pass
+        print('DEBUG MODE: setting strip to solid color: r:{} g:{} b:{}'.format(color.r, color.g, color.b) + divider)
 
 if __name__ == '__main__':
     led_strip = LEDStrip(18, 60)

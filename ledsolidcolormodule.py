@@ -14,9 +14,6 @@ class LEDSolidColorModule(object):
         }
     """
     def __init__(self, led_strip, json_args):
-        print(json_args)
-
-        json_args = json.loads(json_args)
 
         # TODO: TRY / CATCH for non Int rgb arguments
         r = int(json_args['r'])

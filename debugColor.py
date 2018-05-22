@@ -1,3 +1,5 @@
 class Color(object):
     def __init__(self, r, g, b):
-        pass
+        self.r = r
+        self.g = g
+        self.b = b
