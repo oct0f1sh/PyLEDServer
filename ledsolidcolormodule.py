@@ -24,8 +24,9 @@ class LEDSolidColorModule(object):
 
         try:
             duration = int(json_args['duration'])
-        except ValueError as err:
+        except ValueError, KeyError:
             print('LEDSolidColorModule - INVALID DURATION VALUE: {}'.format(err))
+            duration = 0
 
         self.led_strip = led_strip
 
@@ -48,4 +49,4 @@ class LEDSolidColorModule(object):
     def _set_solid(self):
         color = Color(self.r, self.g, self.b)
 
-        self.led_strip.set_solid(color)
+        self.led_strip.set_solid(color, duration)
