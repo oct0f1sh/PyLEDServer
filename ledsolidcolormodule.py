@@ -14,7 +14,7 @@ class LEDSolidColorModule(object):
         }
     """
     def __init__(self, led_strip, json_args):
-        duration = 0
+        self.duration = 0
 
         try:
             r = int(json_args['r'])
@@ -25,7 +25,7 @@ class LEDSolidColorModule(object):
             raise
 
         try:
-            duration = int(json_args['duration'])
+            self.duration = int(json_args['duration'])
         except (KeyError, ValueError) as err:
             print('LEDSolidColorModule - INVALID DURATION VALUE: {}'.format(err))
 
@@ -50,4 +50,4 @@ class LEDSolidColorModule(object):
     def _set_solid(self):
         color = Color(self.r, self.g, self.b)
 
-        self.led_strip.set_solid(color, duration)
+        self.led_strip.set_solid(color, self.duration)
