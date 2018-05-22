@@ -40,7 +40,7 @@ class LEDStrip(object):
 
 
     # TODO: FIX THIS SO THAT IT CAN ASYNCHRONOUSLY RUN LED STRIP
-    def set_solid(self, color, duration):
+    def set_solid(self, color, duration=0):
         strip = self.strip
 
         sleep = duration / strip.numPixels()
