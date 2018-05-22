@@ -21,6 +21,8 @@ class LEDStrip(object):
 
         self.strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL, LED_STRIP)
 
+        self.num_pixels = self.strip.numPixels()
+
         self.strip.begin()
 
     def test_strip(self):
@@ -37,21 +39,6 @@ class LEDStrip(object):
             strip.setPixelColor(i, color)
 
         strip.show()
-
-
-    # TODO: FIX THIS SO THAT IT CAN ASYNCHRONOUSLY RUN LED STRIP
-    def set_solid(self, color, duration=0):
-        strip = self.strip
-
-        sleep_duration = float(duration) / float(strip.numPixels())
-
-        print('sleep duration between LEDs: {}'.format(sleep_duration))
-
-        for i in range(strip.numPixels()):
-            strip.setPixelColor(i, color)
-            strip.show()
-            if duration > 0:
-                sleep(sleep_duration)
         
 
 class DebugLEDStrip(object):
