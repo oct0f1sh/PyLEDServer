@@ -50,7 +50,8 @@ class LEDStrip(object):
         for i in range(strip.numPixels()):
             strip.setPixelColor(i, color)
             strip.show()
-            sleep(sleep_duration)
+            if duration > 0:
+                sleep(sleep_duration)
         
 
 class DebugLEDStrip(object):
