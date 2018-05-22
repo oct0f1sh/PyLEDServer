@@ -43,7 +43,7 @@ class LEDStrip(object):
     def set_solid(self, color, duration=0):
         strip = self.strip
 
-        sleep_duration = duration / strip.numPixels()
+        sleep_duration = float(duration) / float(strip.numPixels())
 
         print('sleep duration between LEDs: {}'.format(sleep_duration))
 
