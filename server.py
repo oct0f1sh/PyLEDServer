@@ -56,7 +56,10 @@ def on_message(client, obj, msg):
     if 'blue' in payload:
         led_strip.set_solid(Color(0, 0, 255))
     if 'solid_color' in payload:
-        LEDSolidColorModule(led_strip, args)
+        try:
+            LEDSolidColorModule(led_strip, args)
+        except ValueError:
+            print(divider[1:])
 
 def interpret_message(json):
     try:

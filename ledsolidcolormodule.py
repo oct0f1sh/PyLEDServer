@@ -14,11 +14,18 @@ class LEDSolidColorModule(object):
         }
     """
     def __init__(self, led_strip, json_args):
+        try:
+            r = int(json_args['r'])
+            g = int(json_args['g'])
+            b = int(json_args['b'])
+        except ValueError as err:
+            print('LEDSolidColorModule - INVALID RGB ARGUMENTS: {}'.format(err))
+            raise
 
-        # TODO: TRY / CATCH for non Int rgb arguments
-        r = int(json_args['r'])
-        g = int(json_args['g'])
-        b = int(json_args['b'])
+        try:
+            duration = int(json_args['duration'])
+        except ValueError as err:
+            print('LEDSolidColorModule - INVALID DURATION VALUE: {}'.format(err))
 
         self.led_strip = led_strip
 

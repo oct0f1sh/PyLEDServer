@@ -6,6 +6,7 @@ except ImportError:
     from debugColor import Color
 import time
 from PIL import ImageColor
+from time import sleep
 
 divider = '\n------------------'
 
@@ -37,13 +38,20 @@ class LEDStrip(object):
 
         strip.show()
 
-    def set_solid(self, color):
+
+    # TODO: FIX THIS SO THAT IT CAN ASYNCHRONOUSLY RUN LED STRIP
+    def set_solid(self, color, duration):
         strip = self.strip
+
+        sleep = duration / strip.numPixels()
+
+        print('sleep duration between LEDs: {}'.format(sleep))
 
         for i in range(strip.numPixels()):
             strip.setPixelColor(i, color)
+            strip.show()
+            sleep(sleep)
         
-        strip.show()
 
 class DebugLEDStrip(object):
     def __init__(self):

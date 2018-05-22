@@ -104,3 +104,4 @@ venv.bak/
 .mypy_cache/
 user_info.txt
 .vscode/
+testing.py
