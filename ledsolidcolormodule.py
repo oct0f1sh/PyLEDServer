@@ -51,9 +51,11 @@ class LEDSolidColorModule(object):
     def _set_solid(self):
         color = Color(self.r, self.g, self.b)
 
-        led_sleep_duration = float(self.duration) / float(self.led_strip.strip.numPixels())
+        pixels = self.led_strip.num_pixels
 
-        for i in range(self.led_strip.strip.numPixels()):
+        led_sleep_duration = float(self.duration) / float(pixels)
+
+        for i in range(pixels):
             self.led_strip.strip.setPixelColor(i, color)
 
             if self.duration > 0:
