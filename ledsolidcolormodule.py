@@ -26,7 +26,7 @@ class LEDSolidColorModule(object):
 
         try:
             duration = int(json_args['duration'])
-        except KeyError, ValueError as err:
+        except (KeyError, ValueError) as err:
             print('LEDSolidColorModule - INVALID DURATION VALUE: {}'.format(err))
 
         self.led_strip = led_strip
