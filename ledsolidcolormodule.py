@@ -3,6 +3,7 @@ try:
 except ImportError:
     from debugColor import Color
 import json
+from time import sleep
 
 class LEDSolidColorModule(object):
     """ sets strip to one solid color """
@@ -50,4 +51,12 @@ class LEDSolidColorModule(object):
     def _set_solid(self):
         color = Color(self.r, self.g, self.b)
 
-        self.led_strip.set_solid(color, self.duration)
+        led_sleep_duration = float(self.duration) / float(self.led_strip.strip.numPixels())
+
+        for i in range(self.led_strip.strip.numPixels()):
+            self.led_strip.strip.setPixelColor(i, color)
+
+            if self.duration > 0:
+                sleep(led_sleep_duration)
+            
+            self.led_strip.strip.show()
