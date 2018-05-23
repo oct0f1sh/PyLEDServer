@@ -40,10 +40,20 @@ class LEDStrip(object):
 
         strip.show()
         
+class DebugStrip(object):
+    def __init__(self):
+        pass
+    
+    def setPixelColor(self, pixel, color):
+        pass
+
+    def show(self):
+        pass
 
 class DebugLEDStrip(object):
     def __init__(self):
-        pass
+        self.num_pixels = 60
+        self.strip = DebugStrip()
 
     def test_strip(self):
         print('DEBUG MODE: testing LED strip' + divider)
