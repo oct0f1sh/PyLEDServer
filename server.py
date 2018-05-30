@@ -14,8 +14,6 @@ try:
 except ImportError:
     from debugColor import Color
 
-from ledsolidcolormodule import LEDSolidColorModule
-
 if len(sys.argv) >= 1 and '--debug' not in sys.argv:
     print('NORMAL MODE' + divider)
     from LEDStrip import LEDStrip
