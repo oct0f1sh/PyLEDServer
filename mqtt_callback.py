@@ -38,6 +38,11 @@ class CallbackContainer(object):
         
         print(divider[1:])
 
+        if self.thread.isAlive():
+            print('JOINING THREAD' + divider)
+            self.thread.should_stop = True
+            self.thread.join()
+
         payload = message['message']
         args = message['args']
 
@@ -49,7 +54,8 @@ class CallbackContainer(object):
             self.led_strip.set_solid(Color(0, 0, 255))
         if 'solid_color' in payload:
             try:
-                LEDSolidColorModule(self.led_strip, args)
+                self.thread = LEDSolidColorModule(self.led_strip, args)
+                self.thread.start()
             except ValueError:
                 print(divider[1:])
 
