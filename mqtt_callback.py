@@ -54,7 +54,7 @@ class CallbackContainer(object):
             self.led_strip.set_solid(Color(0, 0, 255))
         if 'solid_color' in payload:
             try:
-                self.thread = LEDSolidColorModule(self.led_strip, args)
+                self.thread = LEDSolidColorThread(self.led_strip, args)
                 self.thread.start()
             except ValueError:
                 print(divider[1:])
