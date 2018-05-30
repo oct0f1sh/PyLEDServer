@@ -6,8 +6,6 @@ try:
 except ImportError:
     from debugColor import Color
 
-# from ledsolidcolorthread import LEDSolidColorThread
-
 from Plugins import *
 
 divider = '\n------------------'
@@ -56,7 +54,7 @@ class CallbackContainer(object):
             self.led_strip.set_solid(Color(0, 0, 255))
         if 'solid_color' in payload:
             try:
-                self.thread = LEDSolidColorThread(self.led_strip, args)
+                self.thread = ledsolidcolorthread.LEDSolidColorThread(self.led_strip, args)
                 self.thread.start()
             except ValueError:
                 print(divider[1:])
