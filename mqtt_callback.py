@@ -6,7 +6,7 @@ try:
 except ImportError:
     from debugColor import Color
 
-from ledsolidcolormodule import LEDSolidColorModule
+from ledsolidcolorthread import LEDSolidColorThread
 
 divider = '\n------------------'
 
