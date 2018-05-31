@@ -44,10 +44,11 @@ class CallbackContainer(object):
             print('JOINING THREAD' + divider)
             self.thread.should_stop = True
             self.thread.join()
-            self.led_strip.clear_strip()
 
         payload = message['message']
         args = message['args']
+
+        self.led_strip.clear_strip()
 
         try:
             self.thread = self.plugin_manager.get_plugin_thread(payload, args, self.led_strip)

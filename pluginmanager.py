@@ -50,7 +50,7 @@ class PluginManager(object):
 
         for plugin in self.plugins:
             if plugin.identifier == identifier:
-                print('Running plugin \"{}\"'.format(plugin.name) + divider)
+                print('PluginManager - Running plugin \"{}\"'.format(plugin.name) + divider)
                 return plugin.obj(led_strip, args)
 
         print('PluginManager - INVALID PLUGIN IDENTIFIER IN MESSAGE')
