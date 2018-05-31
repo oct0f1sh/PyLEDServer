@@ -69,6 +69,8 @@ class LEDSolidColorThread(threading.Thread):
             self.led_strip.strip.setPixelColor(i, color)
 
             if self.duration != 0:
+                self.led_strip.strip.show()
                 sleep(led_sleep_duration)
-            
+        
+        if self.duration == 0:
             self.led_strip.strip.show()
