@@ -29,14 +29,15 @@ class LEDSolidColorThread(threading.Thread):
             r = int(json_args['r'])
             g = int(json_args['g'])
             b = int(json_args['b'])
-        except ValueError as err:
-            print('LEDSolidColorModule - INVALID RGB ARGUMENTS: {}'.format(err))
+        except (KeyError, ValueError) as err:
+            print('LEDSolidColorThread - INVALID RGB ARGUMENTS: {}'.format(err))
             raise
 
         try:
             self.duration = int(json_args['duration'])
         except (KeyError, ValueError) as err:
-            print('LEDSolidColorModule - INVALID DURATION VALUE: {}'.format(err))
+            print('LEDSolidColorThread - INVALID DURATION VALUE')
+            raise
 
         self.led_strip = led_strip
  

@@ -51,7 +51,7 @@ class CallbackContainer(object):
         try:
             self.thread = self.plugin_manager.get_plugin_thread(payload, args, self.led_strip)
             self.thread.start()
-        except ValueError:
+        except (KeyError, ValueError):
             print(divider[1:])
 
         # if 'test strip' in payload:
