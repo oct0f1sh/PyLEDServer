@@ -43,11 +43,15 @@ class TimerThread(threading.Thread):
 
         print('TOTAL SECONDS: {}'.format(total_seconds))
 
+        total_minutes = float(total_seconds) / 60.0
+
+        print('TOTAL MINUTES: {}'.format(total_minutes))
+
         for second in range(total_seconds):
             if self.should_stop:
                 break
 
-            modulus = float(second) % float(total_seconds / 60)
+            modulus = float(second) % total_minutes
 
             print('SECOND {}, TOTAL: {}'.format(second, modulus))
 
