@@ -49,7 +49,6 @@ class LEDStrip(object):
             strip.setPixelColor(i, off)
 
         strip.show()
-        print('SHOWING CLEAR')
         
 class DebugStrip(object):
     def __init__(self):
