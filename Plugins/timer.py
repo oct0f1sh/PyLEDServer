@@ -57,7 +57,7 @@ class TimerThread(threading.Thread):
 
             print('SECOND {}, TOTAL: {}'.format(second, modulus))
 
-            if modulus == 0.0:
+            if modulus < 1.0:
                 self.led_strip.strip.setPixelColor(pixels - leds_off, off)
                 self.led_strip.strip.show()
                 leds_off += 1
