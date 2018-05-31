@@ -7,6 +7,7 @@ except ImportError:
     from debugColor import Color
 
 from Plugins import *
+from pluginmanager import PluginManager
 
 divider = '\n------------------'
 
@@ -14,6 +15,7 @@ class CallbackContainer(object):
     def __init__(self, led_strip):
         self.thread = threading.Thread()
         self.led_strip = led_strip
+        self.plugin_manager = PluginManager()
 
     def on_connect(self, client, userdata, flags, rc):
         if rc == 0:
@@ -46,18 +48,24 @@ class CallbackContainer(object):
         payload = message['message']
         args = message['args']
 
-        if 'test strip' in payload:
-            self.led_strip.test_strip()
-        if 'clear' in payload:
-            self.led_strip.set_solid(Color(0, 0, 0))
-        if 'blue' in payload:
-            self.led_strip.set_solid(Color(0, 0, 255))
-        if 'solid_color' in payload:
-            try:
-                self.thread = ledsolidcolorthread.LEDSolidColorThread(self.led_strip, args)
-                self.thread.start()
-            except ValueError:
-                print(divider[1:])
+        try:
+            self.thread = self.plugin_manager.get_plugin_thread(payload, args, self.led_strip)
+            self.thread.start()
+        except ValueError:
+            print(divider[1:])
+
+        # if 'test strip' in payload:
+        #     self.led_strip.test_strip()
+        # if 'clear' in payload:
+        #     self.led_strip.set_solid(Color(0, 0, 0))
+        # if 'blue' in payload:
+        #     self.led_strip.set_solid(Color(0, 0, 255))
+        # if 'solid_color' in payload:
+        #     try:
+        #         self.thread = ledsolidcolorthread.LEDSolidColorThread(self.led_strip, args)
+        #         self.thread.start()
+        #     except ValueError:
+        #         print(divider[1:])
 
     def interpret_message(self, json):
         try:

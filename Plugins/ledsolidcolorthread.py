@@ -12,10 +12,14 @@ class LEDSolidColorThread(threading.Thread):
         {
             'r': integer between 0, 255,
             'g': integer between 0, 255,
-            'b': integer between 0, 255
+            'b': integer between 0, 255,
+            'duration': integer
         }
     """
-    message = 'solid_color'
+    p_identifier = 'solid_color' # MUST NOT CONTAIN SPACES
+    p_name = 'LED Solid Color'
+    p_author = 'oct0f1sh'
+    p_expected_args = {'r': 'int', 'g': 'int', 'b': 'int', 'duration': 'int'}
 
     def __init__(self, led_strip, json_args):
         super(LEDSolidColorThread, self).__init__()
@@ -63,7 +67,7 @@ class LEDSolidColorThread(threading.Thread):
 
             self.led_strip.strip.setPixelColor(i, color)
 
-            if self.duration > 0:
+            if self.duration != 0:
                 sleep(led_sleep_duration)
             
             self.led_strip.strip.show()
