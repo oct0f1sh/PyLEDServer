@@ -28,7 +28,7 @@ class LEDStrip(object):
     def test_strip(self):
         strip = self.strip
 
-        for i in range(strip.numPixels()):
+        for i in range(self.num_pixels):
             if i % 3 == 0:
                 color = Color(255, 0, 0)
             elif i % 3 == 1:
@@ -39,6 +39,14 @@ class LEDStrip(object):
             strip.setPixelColor(i, color)
 
         strip.show()
+        
+    def clear_strip(self):
+        strip = self.strip
+
+        off = Color(0, 0, 0)
+
+        for i in range(self.num_pixels):
+            strip.setPixelColor(i, off)
         
 class DebugStrip(object):
     def __init__(self):
