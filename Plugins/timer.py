@@ -46,7 +46,7 @@ class TimerThread(threading.Thread):
                 break
 
             if second % total_seconds == 0:
-                self.led_strip.strip.setPixelColor(pixels - (seconds / minutes), off)
+                self.led_strip.strip.setPixelColor(pixels - (self.seconds / self.minutes), off)
                 self.led_strip.strip.show()
             
             sleep(1)
