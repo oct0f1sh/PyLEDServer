@@ -47,6 +47,8 @@ class TimerThread(threading.Thread):
 
         print('TOTAL MINUTES: {}'.format(total_minutes))
 
+        leds_off = 0
+
         for second in range(total_seconds):
             if self.should_stop:
                 break
@@ -56,8 +58,9 @@ class TimerThread(threading.Thread):
             print('SECOND {}, TOTAL: {}'.format(second, modulus))
 
             if modulus == 0.0:
-                self.led_strip.strip.setPixelColor(pixels - (int(second / (total_seconds / 60))), off)
+                self.led_strip.strip.setPixelColor(pixels - leds_off, off)
                 self.led_strip.strip.show()
+                leds_off += 1
             
             sleep(1)
 
