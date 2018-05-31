@@ -80,4 +80,5 @@ class MovingDotThread(threading.Thread):
                     self.led_strip.strip.setPixelColor(i, color)
                     i -= 1
 
+            self.led_strip.strip.show()
             sleep(led_sleep_duration)
