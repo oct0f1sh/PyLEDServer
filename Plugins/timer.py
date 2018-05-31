@@ -49,9 +49,9 @@ class TimerThread(threading.Thread):
 
             modulus = float(second) % float(total_seconds / 60)
 
-            print('SECOND {}, TOTAL: {}'.format(second, modulus)
+            print('SECOND {}, TOTAL: {}'.format(second, modulus))
 
-            if float(second) % float(total_seconds / 60) == 0.0:
+            if modulus == 0.0:
                 self.led_strip.strip.setPixelColor(pixels - (int(second / (total_seconds / 60))), off)
                 self.led_strip.strip.show()
             
