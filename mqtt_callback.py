@@ -48,7 +48,7 @@ class CallbackContainer(object):
         payload = message['message']
         args = message['args']
 
-        self.led_strip.clear_strip()
+        self.led_strip.wipe_strip()
 
         try:
             self.thread = self.plugin_manager.get_plugin_thread(payload, args, self.led_strip)

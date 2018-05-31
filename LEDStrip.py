@@ -40,13 +40,11 @@ class LEDStrip(object):
 
         strip.show()
         
-    def clear_strip(self):
+    def wipe_strip(self, color=Color(0, 0, 0)):
         strip = self.strip
 
-        off = Color(0, 0, 0)
-
         for i in range(self.num_pixels):
-            strip.setPixelColor(i, off)
+            strip.setPixelColor(i, color)
 
         strip.show()
         
