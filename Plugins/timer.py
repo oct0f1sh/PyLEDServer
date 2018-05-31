@@ -40,15 +40,12 @@ class TimerThread(threading.Thread):
         pixels = self.led_strip.num_pixels
 
         total_seconds = (self.minutes * 60) + self.seconds
-        print(total_seconds)
 
         for second in range(total_seconds):
-            print('SECOND {}'.format(second))
             if self.should_stop:
                 break
 
-            if second % (total_seconds / 60) == 0:
-                print('setting pixel color')
+            if float(second) % float(total_seconds / 60) == 0.0:
                 self.led_strip.strip.setPixelColor(pixels - (int(second / (total_seconds / 60))), off)
                 self.led_strip.strip.show()
             
