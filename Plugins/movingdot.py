@@ -13,6 +13,7 @@ class MovingDotThread(threading.Thread):
             'r': integer between 0, 255,
             'g': integer between 0, 255,
             'b': integer between 0, 255,
+            'duration': integer
         }
     """
     p_identifier = 'ping_pong'
@@ -32,6 +33,12 @@ class MovingDotThread(threading.Thread):
             print('MovingDotThread - INVALID RGB ARGUMENTS: {}'.format(err))
             raise
 
+        try:
+            self.duration = int(json_args['duration'])
+        except (KeyError, ValueError) as err:
+            print('MovingDotThread - INVALID DURATION VALUE')
+            raise
+
         self.led_strip = led_strip
 
         # Check that all rgb values are less than 255
@@ -46,7 +53,7 @@ class MovingDotThread(threading.Thread):
         if b < 256:
             self.b = b
         else:
-                self.b = 0
+            self.b = 0
 
     def run(self):
         color = Color(self.r, self.g, self.b)
@@ -54,7 +61,7 @@ class MovingDotThread(threading.Thread):
 
         pixels = self.led_strip.num_pixels
 
-        led_sleep_duration = 1.0 / 60.0
+        led_sleep_duration = float(self.duration) / float(pixels)
 
         i = 0
         forwards = True
