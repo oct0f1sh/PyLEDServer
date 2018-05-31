@@ -41,9 +41,13 @@ class TimerThread(threading.Thread):
 
         total_seconds = (self.minutes * 60) + self.seconds
 
+        print('TOTAL SECONDS: {}'.format(total_seconds))
+
         for second in range(total_seconds):
             if self.should_stop:
                 break
+
+            print('SECOND {}, TOTAL: {}'.format(float(second) % float(total_seconds / 60)))
 
             if float(second) % float(total_seconds / 60) == 0.0:
                 self.led_strip.strip.setPixelColor(pixels - (int(second / (total_seconds / 60))), off)
