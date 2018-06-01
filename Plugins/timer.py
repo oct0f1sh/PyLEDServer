@@ -49,6 +49,7 @@ class TimerThread(threading.Thread):
 
         # time measurement test stuff
         start_time = time()
+        total_inaccuracy = 0.0
         ####
 
         while not self.should_stop:
@@ -58,12 +59,13 @@ class TimerThread(threading.Thread):
                 print('overlap: {} seconds'.format(overlap))
 
                 rec_time = time() - overlap
+                total_inaccuracy += rec_time
 
                 self.led_strip.strip.setPixelColor((pixels - leds_off), off)
                 self.led_strip.strip.show()
 
                 if leds_off == pixels:
-                    print('TIME ELAPSED: {} seconds'.format(time() - start_time))
+                    print('TIME ELAPSED: {} seconds, OVERLAP: {} seconds'.format(time() - start_time, total_inaccuracy))
                     break
                 else:
                     leds_off += 1
