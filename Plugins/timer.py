@@ -65,7 +65,7 @@ class TimerThread(threading.Thread):
                 self.led_strip.strip.show()
 
                 if leds_off == pixels:
-                    print('TIME ELAPSED: {0:.4f} seconds, OVERLAP: {0:.4f} seconds'.format(((time() - start_time), total_inaccuracy)))
+                    print('TIME ELAPSED: {0:.4f} seconds, OVERLAP: {0:.4f} seconds'.format(float(time() - start_time), float(total_inaccuracy)))
                     break
                 else:
                     leds_off += 1
