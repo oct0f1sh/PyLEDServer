@@ -68,6 +68,6 @@ class TimerThread(threading.Thread):
                 else:
                     leds_off += 1
 
-        print('TIME ELAPSED: {}'.format(start_time - time()))
+        print('TIME ELAPSED: {}'.format(time() - start_time))
 
         self.led_strip.wipe_strip(Color(255, 0, 0))
