@@ -58,7 +58,7 @@ class TimerThread(threading.Thread):
 
         while not self.should_stop:
             if (time() - rec_time) >= time_between_leds:
-                overlap = time() - rec_time
+                overlap = (time() - rec_time) - time_between_leds
 
                 rec_time = time() - overlap
 
@@ -70,6 +70,6 @@ class TimerThread(threading.Thread):
                 else:
                     leds_off += 1
 
-        print('TIME ELAPSED: {}'.format(time() - start_time))
+        print('TIME ELAPSED: {} seconds'.format(time() - start_time))
 
         self.led_strip.wipe_strip(Color(255, 0, 0))
