@@ -57,8 +57,10 @@ class TimerThread(threading.Thread):
         ####
 
         while not self.should_stop:
-            if (time() - rec_time) > time_between_leds:
-                rec_time = time()
+            if (time() - rec_time) >= time_between_leds:
+                overlap = time() - rec_time
+
+                rec_time = time() - overlap
 
                 self.led_strip.strip.setPixelColor((pixels - leds_off), off)
                 self.led_strip.strip.show()
