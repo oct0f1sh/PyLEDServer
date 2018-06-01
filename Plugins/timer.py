@@ -53,15 +53,15 @@ class TimerThread(threading.Thread):
         rec_time = time()
 
         while not self.should_stop:
-            if leds_off == pixels:
-                break
-
             if (time() - rec_time) > time_between_leds:
                 rec_time = time()
 
                 self.led_strip.strip.setPixelColor((pixels - leds_off), off)
                 self.led_strip.strip.show()
 
-                leds_off += 1
+                if leds_off == pixels:
+                    break
+                else:
+                    leds_off += 1
 
         self.led_strip.wipe_strip(Color(255, 0, 0))
