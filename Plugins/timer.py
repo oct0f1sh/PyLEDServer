@@ -3,7 +3,7 @@ try:
 except ImportError:
     from debugColor import Color
 import json
-from time import sleep
+from time import sleep, time
 import threading
 
 class TimerThread(threading.Thread):
@@ -49,19 +49,35 @@ class TimerThread(threading.Thread):
 
         leds_off = 0
 
-        for second in range(total_seconds):
-            if self.should_stop:
+        # for second in range(total_seconds):
+        #     if self.should_stop:
+        #         break
+
+        #     modulus = float(second) % total_minutes
+
+        #     print('SECOND {}, TOTAL: {}'.format(second, modulus))
+
+        #     if modulus <  1.0:
+        #         self.led_strip.strip.setPixelColor(pixels - leds_off, off)
+        #         self.led_strip.strip.show()
+        #         leds_off += 1
+            
+        #     sleep(1)
+
+        time_between_leds = float(total_seconds) / float(pixels)
+        rec_time = time()
+
+        while not self.should_stop:
+            if leds_off == pixels:
                 break
 
-            modulus = float(second) % total_minutes
+            if (time() - rec_time) > time_between_leds:
+                print('off with led')
+                rec_time = time()
 
-            print('SECOND {}, TOTAL: {}'.format(second, modulus))
-
-            if modulus < 1.0:
-                self.led_strip.strip.setPixelColor(pixels - leds_off, off)
+                self.led_strip.strip.setPixelColor((pixels - leds_off), off)
                 self.led_strip.strip.show()
+
                 leds_off += 1
-            
-            sleep(1)
 
         self.led_strip.wipe_strip(Color(255, 0, 0))
