@@ -58,7 +58,7 @@ class TimerThread(threading.Thread):
 
                 total_inaccuracy += float(overlap)
 
-                print('overlap: {} seconds'.format(overlap))
+                print('overlap: {1:.10f} seconds'.format(float(overlap)))
 
                 rec_time = time() - overlap
 
