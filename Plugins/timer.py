@@ -56,10 +56,11 @@ class TimerThread(threading.Thread):
             if (time() - rec_time) >= time_between_leds:
                 overlap = (time() - rec_time) - time_between_leds
 
+                total_inaccuracy += overlap
+
                 print('overlap: {} seconds'.format(overlap))
 
                 rec_time = time() - overlap
-                total_inaccuracy += rec_time
 
                 self.led_strip.strip.setPixelColor((pixels - leds_off), off)
                 self.led_strip.strip.show()
