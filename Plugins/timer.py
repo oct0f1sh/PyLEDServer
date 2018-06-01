@@ -52,6 +52,10 @@ class TimerThread(threading.Thread):
         time_between_leds = float(total_seconds) / float(pixels)
         rec_time = time()
 
+        # time measurement test stuff
+        start_time = time()
+        ####
+
         while not self.should_stop:
             if (time() - rec_time) > time_between_leds:
                 rec_time = time()
@@ -63,5 +67,7 @@ class TimerThread(threading.Thread):
                     break
                 else:
                     leds_off += 1
+
+        print('TIME ELAPSED: {}'.format(start_time - time()))
 
         self.led_strip.wipe_strip(Color(255, 0, 0))
