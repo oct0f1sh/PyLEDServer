@@ -40,12 +40,7 @@ class TimerThread(threading.Thread):
         pixels = self.led_strip.num_pixels
 
         total_seconds = (self.minutes * 60) + self.seconds
-
         print('TOTAL SECONDS: {}'.format(total_seconds))
-
-        total_minutes = float(total_seconds) / 60.0
-
-        print('TOTAL MINUTES: {}'.format(total_minutes))
 
         leds_off = 0
 
@@ -60,16 +55,17 @@ class TimerThread(threading.Thread):
             if (time() - rec_time) >= time_between_leds:
                 overlap = (time() - rec_time) - time_between_leds
 
+                print('overlap: {} seconds'.format(overlap))
+
                 rec_time = time() - overlap
 
                 self.led_strip.strip.setPixelColor((pixels - leds_off), off)
                 self.led_strip.strip.show()
 
                 if leds_off == pixels:
+                    print('TIME ELAPSED: {} seconds'.format(time() - start_time))
                     break
                 else:
                     leds_off += 1
-
-        print('TIME ELAPSED: {} seconds'.format(time() - start_time))
 
         self.led_strip.wipe_strip(Color(255, 0, 0))
