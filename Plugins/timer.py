@@ -56,7 +56,7 @@ class TimerThread(threading.Thread):
             if (time() - rec_time) >= time_between_leds:
                 overlap = (time() - rec_time) - time_between_leds
 
-                total_inaccuracy += overlap
+                total_inaccuracy += float(overlap)
 
                 print('overlap: {} seconds'.format(overlap))
 
