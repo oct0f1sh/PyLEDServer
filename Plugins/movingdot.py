@@ -55,7 +55,7 @@ class MovingDotThread(threading.Thread):
         else:
             self.b = 0
 
-    def no_run(self):
+    def run(self):
         color = Color(self.r, self.g, self.b)
         off = Color(0, 0, 0)
 
@@ -90,7 +90,7 @@ class MovingDotThread(threading.Thread):
             self.led_strip.strip.show()
             sleep(led_sleep_duration)
 
-    def run(self):
+    def no_run(self):
         num_points = 4
 
         bulge = []
@@ -98,7 +98,7 @@ class MovingDotThread(threading.Thread):
         for i in reversed(range(1, num_points * 10, 10)):
             bulge.append(Color(self.r / i, self.g / i, self.b / i))
 
-        bulge.extend(bulge[::-1])
+        bulge.extend(bulge[1::-1])
 
         for _ in range(self.led_strip.num_pixels - len(bulge)):
             bulge.append(Color(0, 0, 0))
