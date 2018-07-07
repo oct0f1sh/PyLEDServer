@@ -91,7 +91,7 @@ class MovingDotThread(threading.Thread):
             sleep(led_sleep_duration)
 
     def run(self):
-        num_points = 3
+        num_points = 10
 
         bulge = []
 
