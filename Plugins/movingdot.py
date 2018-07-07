@@ -55,7 +55,7 @@ class MovingDotThread(threading.Thread):
         else:
             self.b = 0
 
-    def _run(self):
+    def no_run(self):
         color = Color(self.r, self.g, self.b)
         off = Color(0, 0, 0)
 
