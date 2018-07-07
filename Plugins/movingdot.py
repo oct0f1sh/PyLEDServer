@@ -96,7 +96,7 @@ class MovingDotThread(threading.Thread):
         bulge = []
 
         for i in reversed(range(1, num_points * 10, 10)):
-            bulge.append(Color(self.r / i ** 3, self.g / i ** 3, self.b / i ** 3))
+            bulge.append(Color(self.r / i, self.g / i, self.b / i))
 
         bulge.extend(bulge[::-1])
 
