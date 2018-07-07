@@ -55,7 +55,7 @@ class MovingDotThread(threading.Thread):
         else:
             self.b = 0
 
-    def run(self):
+    def _run(self):
         color = Color(self.r, self.g, self.b)
         off = Color(0, 0, 0)
 
@@ -89,3 +89,6 @@ class MovingDotThread(threading.Thread):
 
             self.led_strip.strip.show()
             sleep(led_sleep_duration)
+
+    def run(self):
+        self.led_strip.set_pattern([Color(255, 0, 0), Color(0, 255, 0), Color(0, 0, 255)])

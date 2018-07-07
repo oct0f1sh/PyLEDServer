@@ -58,8 +58,6 @@ class TimerThread(threading.Thread):
 
                 total_inaccuracy += float(overlap)
 
-                print('overlap: {:.10f} seconds, inaccuracy: {:.10f}'.format(float(overlap), float(total_inaccuracy)))
-
                 rec_time = time() - overlap
 
                 self.led_strip.strip.setPixelColor((pixels - leds_off), off)
@@ -67,7 +65,7 @@ class TimerThread(threading.Thread):
 
                 if leds_off == pixels:
                     print(total_inaccuracy)
-                    print('TIME ELAPSED: {:.4f} seconds, OVERLAP: {:.4f} seconds'.format(float(time() - start_time), float(total_inaccuracy)))
+                    print('TIME ELAPSED: {:.4f} seconds, INACCURACY: {:.4f} seconds'.format(float(time() - start_time), float(total_inaccuracy)))
                     break
                 else:
                     leds_off += 1

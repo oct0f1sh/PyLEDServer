@@ -47,6 +47,16 @@ class LEDStrip(object):
             strip.setPixelColor(i, color)
 
         strip.show()
+
+    def set_pattern(self, pattern):
+        strip = self.strip
+
+        for i in range(self.num_pixels):
+            color = pattern[i % len(pattern)]
+
+            strip.setPixelColor(i, color)
+
+        strip.show()
         
 class DebugStrip(object):
     def __init__(self):
@@ -66,7 +76,7 @@ class DebugLEDStrip(object):
     def test_strip(self):
         print('DEBUG MODE: testing LED strip' + divider)
     
-    def set_solid(self, color):
+    def wipe_strip(self, color):
         print('DEBUG MODE: setting strip to solid color: r:{} g:{} b:{}'.format(color.r, color.g, color.b) + divider)
 
 if __name__ == '__main__':
