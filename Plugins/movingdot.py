@@ -100,4 +100,6 @@ class MovingDotThread(threading.Thread):
 
         bulge.append(bulge[::-1])
 
+        print(bulge)
+
         self.led_strip.set_pattern(bulge)
