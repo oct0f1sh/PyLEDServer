@@ -96,10 +96,8 @@ class MovingDotThread(threading.Thread):
         bulge = []
 
         for i in reversed(range(1, num_points + 1)):
-            bulge.append(Color(self.r / i, self.g / i, self.b / i))
+            bulge.append(Color(self.r / i ** 2, self.g / i ** 2, self.b / i ** 2))
 
         bulge.extend(bulge[::-1])
-
-        print(bulge)
 
         self.led_strip.set_pattern(bulge)

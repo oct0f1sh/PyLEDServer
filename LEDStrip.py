@@ -53,9 +53,7 @@ class LEDStrip(object):
 
         for i in range(self.num_pixels):
             color = pattern[i % len(pattern)]
-
-            print('Color: {}'.format(color))
-            print('Index: {} Type: {}'.format(i, type(i)))
+            
             strip.setPixelColor(i, color)
 
         strip.show()
