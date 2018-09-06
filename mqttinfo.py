@@ -7,7 +7,7 @@ class MqttInfo(object):
         if MqttInfo._is_first_time():
             f = open('user_info.txt', 'w')
 
-            print('PLEASE INPUT REQUIRED INFORMATION')
+            print('Performing first time setup...')
             
             self.mqtt_url = raw_input('MQTT url: ')
             self.mqtt_username = raw_input('MQTT username: ')
