@@ -58,7 +58,7 @@ class LEDStrip(object):
 
         strip.show()
         
-class DebugStrip(object):
+class VirtualLEDStrip(object):
     def __init__(self):
         pass
     
@@ -71,13 +71,16 @@ class DebugStrip(object):
 class DebugLEDStrip(object):
     def __init__(self):
         self.num_pixels = 60
-        self.strip = DebugStrip()
+        self.strip = VirtualLEDStrip()
 
     def test_strip(self):
         print('DEBUG MODE: testing LED strip' + divider)
     
-    def wipe_strip(self, color):
+    def wipe_strip(self, color=Color(0,0,0)):
         print('DEBUG MODE: setting strip to solid color: r:{} g:{} b:{}'.format(color.r, color.g, color.b) + divider)
+
+    def set_pattern(self, pattern):
+        print('DEBUG MODE: setting strip to pattern')
 
 if __name__ == '__main__':
     led_strip = LEDStrip(18, 60)

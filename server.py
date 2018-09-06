@@ -32,7 +32,8 @@ if __name__ == '__main__':
     mqtt_username = user_info.mqtt_username
     mqtt_password = user_info.mqtt_password
 
-    print('url: {}\nusername: {}\npassword: {}'.format(mqtt_host, mqtt_username, mqtt_password) + divider)
+    # print('url: {}\nusername: {}\npassword: {}'.format(mqtt_host, mqtt_username, mqtt_password) + divider)
+    print(divider[1:])
 
     client = mqtt.Client()
     callback = CallbackContainer(led_strip)
