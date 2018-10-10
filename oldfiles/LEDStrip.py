@@ -26,6 +26,7 @@ class LEDStrip(object):
         self.strip.begin()
 
     def test_strip(self):
+        """ Set strip to repeat RGB """
         strip = self.strip
 
         for i in range(self.num_pixels):
@@ -41,6 +42,7 @@ class LEDStrip(object):
         strip.show()
         
     def wipe_strip(self, color=Color(0, 0, 0)):
+        """ Sets self.strip to a uniform color """
         strip = self.strip
 
         for i in range(self.num_pixels):
@@ -49,6 +51,7 @@ class LEDStrip(object):
         strip.show()
 
     def set_pattern(self, pattern):
+        """ Sets all of self.strip to input pattern (repeated if necessary) """
         strip = self.strip
 
         for i in range(self.num_pixels):
@@ -58,7 +61,7 @@ class LEDStrip(object):
 
         strip.show()
         
-class DebugStrip(object):
+class VirtualLEDStrip(object):
     def __init__(self):
         pass
     
@@ -71,13 +74,16 @@ class DebugStrip(object):
 class DebugLEDStrip(object):
     def __init__(self):
         self.num_pixels = 60
-        self.strip = DebugStrip()
+        self.strip = VirtualLEDStrip()
 
     def test_strip(self):
         print('DEBUG MODE: testing LED strip' + divider)
     
-    def wipe_strip(self, color):
+    def wipe_strip(self, color=Color(0,0,0)):
         print('DEBUG MODE: setting strip to solid color: r:{} g:{} b:{}'.format(color.r, color.g, color.b) + divider)
+
+    def set_pattern(self, pattern):
+        print('DEBUG MODE: setting strip to pattern')
 
 if __name__ == '__main__':
     led_strip = LEDStrip(18, 60)
