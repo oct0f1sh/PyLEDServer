@@ -1,4 +1,7 @@
 from utils.user import User
+import json
+import mqtt.callbacks as mqtt_util
+import paho.mqtt.client as mqtt
 import logging
 
 # create logger
@@ -23,9 +26,32 @@ logger.addHandler(fh)
 logger.addHandler(ch)
 
 if __name__ == "__main__":
-    logger.info('Let\'s get you logged in...')
+    logger.info('Starting server')
+    # get user credentials
     user = User()
 
+    # create MQTT client and associate callbacks
+    logger.debug('Creating client')
+    client = mqtt.Client()
+    callback = mqtt_util.CallbackContainer()
+    client.on_message = callback.on_message
+    client.on_publish = callback.on_publish
+    client.on_subscribe = callback.on_subscribe
 
+    # give user credentials to client
+    client.username_pw_set(user.mqtt_username, user.mqtt_password)
+
+    # connect to MQTT server and subscribe to topic
+    logger.debug('Connecting to server {}:{}'.format(user.mqtt_url, user.mqtt_port))
+    client.connect(user.mqtt_url, int(user.mqtt_port))
+    client.subscribe('test', 0)
+
+    success_message = {'message': 'successfully started client',
+                       'args' : {}}
+
+    # publish connection message to ensure successful connection
+    client.publish('test', json.dumps(success_message, ensure_ascii=True))
+
+    client.loop_forever()
 
 # logging.exception() will show the traceback of what failed in a try; catch; except
