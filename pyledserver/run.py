@@ -1,4 +1,4 @@
-from utils.user import User
+from utils.credentials import CredentialsContainer
 import json
 import mqtt.callbacks as mqtt_util
 import paho.mqtt.client as mqtt
@@ -28,7 +28,7 @@ logger.addHandler(ch)
 if __name__ == "__main__":
     logger.info('Starting server')
     # get user credentials
-    user = User()
+    user = CredentialsContainer()
 
     # create MQTT client and associate callbacks
     logger.debug('Creating client')

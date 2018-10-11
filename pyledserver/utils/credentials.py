@@ -4,9 +4,9 @@ import logging
 logger = logging.getLogger('pyledserver.User')
 logger.setLevel(logging.INFO)
 
-class User(object):
+class CredentialsContainer(object):
     def __init__(self):
-        if User._is_first_setup():
+        if CredentialsContainer._is_first_setup():
             with open('user_info.txt', 'w') as f:
                 self.mqtt_url      = input('MQTT url: ')
                 self.mqtt_username = input('MQTT username: ')
@@ -60,10 +60,9 @@ class User(object):
                 logger.exception('Could not open user_info.txt')
 
 
-
     @staticmethod
     def _is_first_setup():
-        if os.path.isfile('user_info.txt'): # checks for previous user_info.txt file
+        if os.path.isfile('user_info.txt'): # checks for existing user_info.txt file in current directory
             logger.info('Found MQTT user credentials')
             return False
 
