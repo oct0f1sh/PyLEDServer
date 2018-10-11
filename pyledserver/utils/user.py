@@ -1,7 +1,8 @@
 import os.path
 import logging
 
-logger = logging.getLogger('run.user')
+logger = logging.getLogger('pyledserver.User')
+logger.setLevel(logging.INFO)
 
 class User(object):
     def __init__(self):
@@ -14,32 +15,49 @@ class User(object):
 
                 f.writelines(['mqtt_url={}\n'.format(self.mqtt_url),
                               'mqtt_username={}\n'.format(self.mqtt_username),
-                              'mqtt_password={}'.format(self.mqtt_password),
+                              'mqtt_password={}\n'.format(self.mqtt_password),
                               'mqtt_port={}'.format(self.mqtt_port)])
 
-        else: # read stored user data
+        # read stored user data
+        else: 
+            logger.debug('Not first time setup')
             try:
+                logger.debug('Trying to open file')
                 with open('user_info.txt', 'r') as f:
+                    logger.debug('Opened file')
+
                     for line in f:
-                        if '\#\#' not in line: # if line is not a comment
+                        # if line is not a comment
+                        if '\#\#' not in line: 
                             info = line.split('=')
                             descriptor = info[0]
                             credential = info[1][:-1]
 
                             if descriptor == 'mqtt_url':
                                 self.mqtt_url = credential
-                                logging.info('URL found')
+                                logger.debug('URL found')
                             elif descriptor == 'mqtt_username':
                                 self.mqtt_username = credential
-                                logging.info('username found')
+                                logger.debug('username found')
                             elif descriptor == 'mqtt_password':
                                 self.mqtt_password = credential
-                                logging.info('password found')
+                                logger.debug('password found')
                             elif descriptor == 'mqtt_port':
                                 self.mqtt_port = credential
-                                logging.info('port found')
+                                logger.debug('port found')
+
+                    # validate that all credentials were found
+                    if not self.mqtt_url:
+                        logger.error('Missing mqtt_url in user_info.txt')
+                    if not self.mqtt_username:
+                        logger.error('Missing mqtt_username in user_info.txt')
+                    if not self.mqtt_password:
+                        logger.error('Missing mqtt_password in user_info.txt')
+                    if not self.mqtt_port:
+                        logger.error('Missing mqtt_port in user_info.txt')
+
             except IOError:
-                logger.error('Could not open user_info.txt')
+                logger.exception('Could not open user_info.txt')
 
 
 
