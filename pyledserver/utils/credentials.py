@@ -47,6 +47,7 @@ class CredentialsContainer(object):
                                 logger.debug('port found')
 
                     # validate that all credentials were found
+                    # TODO: This doesn't actually work, so make it work
                     if not self.mqtt_url:
                         logger.error('Missing mqtt_url in user_info.txt')
                     if not self.mqtt_username:

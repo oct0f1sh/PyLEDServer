@@ -7,10 +7,10 @@ logger.setLevel(logging.INFO)
 
 class CallbackContainer(object):
     """ Manages MQTT callbacks """
-    def __init__(self):
+    def __init__(self, led_strip):
         logger.debug('Initializing thread')
         self.thread = threading.Thread()
-        # self.led_strip = led_strip
+        self.led_strip = led_strip
         
     def on_connect(self, client, userdata, flags, rc):
         if rc == 0:

@@ -1,8 +1,13 @@
-from utils.credentials import CredentialsContainer
 import json
+import logging
+
 import mqtt.callbacks as mqtt_util
 import paho.mqtt.client as mqtt
-import logging
+from strip.ledstrip import LEDStrip
+from utils.credentials import CredentialsContainer
+
+LED_COUNT = 60
+LED_PIN = 18
 
 # create logger
 logger = logging.getLogger('pyledserver')
@@ -26,14 +31,20 @@ logger.addHandler(fh)
 logger.addHandler(ch)
 
 if __name__ == "__main__":
-    logger.info('Starting server')
+    debug = True
+
+    if debug:
+        led_strip = LEDStrip(num=LED_COUNT, pin=None)
+    else:
+        led_strip = LEDStrip(num=LED_COUNT, pin=LED_PIN)
+
     # get user credentials
     user = CredentialsContainer()
 
     # create MQTT client and associate callbacks
     logger.debug('Creating client')
     client = mqtt.Client()
-    callback = mqtt_util.CallbackContainer()
+    callback = mqtt_util.CallbackContainer(led_strip)
     client.on_message = callback.on_message
     client.on_publish = callback.on_publish
     client.on_subscribe = callback.on_subscribe
