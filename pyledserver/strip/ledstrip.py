@@ -7,8 +7,6 @@ logger.setLevel(logging.DEBUG)
 
 class LEDStrip(BaseStrip):
     def __init__(self, num, pin):
-        
-
         if pin:
             # import HW interface library and initialize strip object
             from neopixel import Adafruit_NeoPixel, ws

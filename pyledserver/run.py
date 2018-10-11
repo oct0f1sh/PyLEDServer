@@ -53,7 +53,7 @@ if __name__ == "__main__":
     client.username_pw_set(user.mqtt_username, user.mqtt_password)
 
     # connect to MQTT server and subscribe to topic
-    logger.debug('Connecting to server {}:{}'.format(user.mqtt_url, user.mqtt_port))
+    logger.info('Connecting to server {}:{}'.format(user.mqtt_url, user.mqtt_port))
     client.connect(user.mqtt_url, int(user.mqtt_port))
     client.subscribe('test', 0)
 
@@ -64,5 +64,3 @@ if __name__ == "__main__":
     client.publish('test', json.dumps(success_message, ensure_ascii=True))
 
     client.loop_forever()
-
-# logging.exception() will show the traceback of what failed in a try; catch; except
