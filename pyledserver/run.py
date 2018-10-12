@@ -34,16 +34,18 @@ if __name__ == "__main__":
     debug = True
 
     if debug:
+        client_id = 'pyledserver_debug'
         led_strip = LEDStrip(num=LED_COUNT, pin=None)
     else:
+        client_id = 'pyledserver_rpi'
         led_strip = LEDStrip(num=LED_COUNT, pin=LED_PIN)
 
     # get user credentials
     user = CredentialsContainer()
 
     # create MQTT client and associate callbacks
-    logger.debug('Creating client')
-    client = mqtt.Client()
+    logger.debug('Creating client: {}'.format(client_id))
+    client = mqtt.Client(client_id=client_id, clean_session=False)
     callback = mqtt_util.CallbackContainer(led_strip)
     client.on_message = callback.on_message
     client.on_publish = callback.on_publish
