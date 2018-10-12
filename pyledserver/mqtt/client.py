@@ -17,6 +17,8 @@ class PyLEDClient(mqtt.Client):
         self.on_message = self.callback.on_message
         self.on_publish = self.callback.on_publish
         self.on_subscribe = self.callback.on_subscribe
+        self.on_connect = self.callback.on_connect
+        self.on_disconnect = self.callback.on_disconnect
 
         # assign user credentials to client
         self.username_pw_set(credentials.mqtt_username, credentials.mqtt_password)

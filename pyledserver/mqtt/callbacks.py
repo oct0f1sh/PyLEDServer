@@ -17,7 +17,13 @@ class CallbackContainer(object):
         self.is_connected = False
         
     def on_connect(self, client, userdata, flags, rc):
-        if rc == 0:
+        self._evaluate_rc(rc)
+
+    def on_disconnect(self, client, userdata, rc):
+        self._evaluate_rc(rc)
+
+    def _evaluate_rc(self, rc):
+        if rc == 0: 
             logger.info('Successfully connected to MQTT server')
             self.is_connected = True
         elif rc == 1:
@@ -36,7 +42,7 @@ class CallbackContainer(object):
             logger.critical('Connection refused - not authorized')
             self.is_connected = False
         else:
-            logger.error('Failed to connect with rc: {}'.format(rc))
+            logger.critical('Failed to connect with rc: {}'.format(rc))
             self.is_connected = False
 
     def on_message(self, client, obj, msg):

@@ -1,13 +1,17 @@
 import json
 import logging
+import argparse
 
-import mqtt.callbacks as mqtt_util
-import paho.mqtt.client as mqtt
 from strip.ledstrip import LEDStrip
 from utils.credentials import CredentialsContainer
+from mqtt.client import PyLEDClient
 
 LED_COUNT = 60
 LED_PIN = 18
+
+# parse arguments
+parser = argparse.ArgumentParser(description='Start PyLED server.')
+parser.add_argument('--debug', dest='is_debug', type=bool, const=True, nargs='?', default=False, help='Activate virtual LED strip.')
 
 # create logger
 logger = logging.getLogger('pyledserver')
@@ -31,9 +35,9 @@ logger.addHandler(fh)
 logger.addHandler(ch)
 
 if __name__ == "__main__":
-    debug = True
+    args = parser.parse_args()
 
-    if debug:
+    if args.is_debug:
         client_id = 'pyledserver_debug'
         led_strip = LEDStrip(num=LED_COUNT, pin=None)
     else:
@@ -43,26 +47,8 @@ if __name__ == "__main__":
     # get user credentials
     user = CredentialsContainer()
 
-    # create MQTT client and associate callbacks
-    logger.debug('Creating client: {}'.format(client_id))
-    client = mqtt.Client(client_id=client_id, clean_session=False)
-    callback = mqtt_util.CallbackContainer(led_strip)
-    client.on_message = callback.on_message
-    client.on_publish = callback.on_publish
-    client.on_subscribe = callback.on_subscribe
+    client = PyLEDClient(client_id, user, 'test', led_strip)
 
-    # give user credentials to client
-    client.username_pw_set(user.mqtt_username, user.mqtt_password)
-
-    # connect to MQTT server and subscribe to topic
-    logger.info('Connecting to server {}:{}'.format(user.mqtt_url, user.mqtt_port))
-    client.connect(user.mqtt_url, int(user.mqtt_port))
-    client.subscribe('test', 0)
-
-    success_message = {'message': 'successfully started client',
-                       'args' : {}}
-
-    # publish connection message to ensure successful connection
-    client.publish('test', json.dumps(success_message, ensure_ascii=True))
-
+    # run the client
+    # TODO: Find a better way to do this to auto reconnect
     client.loop_forever()
