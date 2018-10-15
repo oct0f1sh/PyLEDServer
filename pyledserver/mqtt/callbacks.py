@@ -45,6 +45,23 @@ class CallbackContainer(object):
             logger.critical('Failed to connect with rc: {}'.format(rc))
             self.is_connected = False
 
+    def _interpret_message(self, json):
+        try:
+            _ = json['message']
+        except KeyError:
+            logger.error('json missing message key')
+            raise
+
+        try:
+            args = json['args']
+
+            # all args keys must have a dictionary value
+            if type(args) is not dict:
+                raise KeyError('Args must be of type dictionary')
+        except KeyError:
+            logger.error('json missing args dictionary')
+            raise
+                
     def on_message(self, client, obj, msg):
         try:
             logger.debug('Checking if JSON')
@@ -54,6 +71,35 @@ class CallbackContainer(object):
             return
         
         logger.info('Message received from topic: {}\n{}'.format(msg.topic, json.dumps(message, indent=4)))
+
+        # check if json message adheres to proper structure
+        try:
+            self._interpret_message(message)
+        except KeyError:
+            # error is logged by logger in _interpret_message()
+            return
+
+        # if thread is already running
+        if self.thread.isAlive():
+            logger.info('Joining thread')
+            # tell thread to stop and join it
+            self.thread.should_stop = True
+            self.thread.join()
+
+        # seperate values into variables
+        # this structure is validated in self._interpret_message()
+        payload = message['message']
+        args = message['args']
+
+        # TODO: reset strip to blank slate
+
+        # run plugin specified in message
+        try:
+            self.thread = self.plugin_manager.get_plugin_thread(payload, args, self.led_strip)
+            self.thread.start()
+        except (KeyError, ValueError):
+            # this is executed when message does not correspond to an available plugin
+            return
 
     def on_publish(self, client, obj, mid):
         logger.debug('Message published.')

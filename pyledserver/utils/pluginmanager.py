@@ -1,11 +1,12 @@
-import plugins
-import logging
 import importlib
 import inspect
+import logging
 import threading
 
+import plugins
+
 logger = logging.getLogger('pyledserver.PluginManager')
-logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.INFO)
 
 class PluginInfo(object):
     def __init__(self, obj):

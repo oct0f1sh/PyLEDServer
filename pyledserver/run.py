@@ -12,6 +12,7 @@ LED_PIN = 18
 # parse arguments
 parser = argparse.ArgumentParser(description='Start PyLED server.')
 parser.add_argument('--debug', dest='is_debug', type=bool, const=True, nargs='?', default=False, help='Activate virtual LED strip.')
+is_debug = parser.parse_args().is_debug
 
 # create logger
 logger = logging.getLogger('pyledserver')
@@ -35,9 +36,7 @@ logger.addHandler(fh)
 logger.addHandler(ch)
 
 if __name__ == "__main__":
-    args = parser.parse_args()
-
-    if args.is_debug:
+    if is_debug:
         client_id = 'pyledserver_debug'
         led_strip = LEDStrip(num=LED_COUNT, pin=None)
     else:
