@@ -3,6 +3,8 @@ import sys
 import logging
 import pygame
 from basestrip import BaseStrip
+import threading
+import time
 
 logger = logging.getLogger('pyledserver.VirtualStrip')
 logger.setLevel(logging.DEBUG)
@@ -30,8 +32,7 @@ class VirtualStrip(BaseStrip):
     def __init__(self, num):
         logger.info('Initialized virtual LED strip')
 
-        self._setup_simulator()
-        self._run_simulator()
+        self.thread = threading.Thread(target=self._run_simulator)
     
     def _setup_simulator(self):
         pygame.init()
@@ -41,10 +42,20 @@ class VirtualStrip(BaseStrip):
         pygame.display.set_caption('PyLEDServer Simulator')
 
     def _run_simulator(self):
+        self._setup_simulator()
+
         while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     return
+            pygame.display.flip()
+
+    def show(self):
+        print('skunk')
+        pygame.display.set_caption('swag money')
+
 
 if __name__ == '__main__':
     strip = VirtualStrip(60)
+
+    strip.thread.start()
