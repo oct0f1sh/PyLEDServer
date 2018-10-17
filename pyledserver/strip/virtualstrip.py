@@ -1,61 +1,73 @@
-import sys
-
+import json
 import logging
-import pygame
-from basestrip import BaseStrip
-import threading
-import time
+import subprocess
+import sys
+import os
+
+from strip.basestrip import BaseStrip
 
 logger = logging.getLogger('pyledserver.VirtualStrip')
-logger.setLevel(logging.DEBUG)
-
-# pygame.init()
-
-# display = pygame.display.set_mode((1000, 200))
-# pygame.display.set_caption('Swag money')
-
-# should_quit = False
-
-# clock = pygame.time.Clock()
-
-# while not should_quit:
-#     for event in pygame.event.get():
-#         if event.type == pygame.QUIT:
-#             sys.exit()
-
-#     pygame.draw.rect(display, (255, 0, 0), (0, 0, 200, 200))
-
-#     pygame.display.flip()
-#     clock.tick(60)
+logger.setLevel(logging.INFO)
 
 class VirtualStrip(BaseStrip):
     def __init__(self, num):
         logger.info('Initialized virtual LED strip')
 
-        self.thread = threading.Thread(target=self._run_simulator)
-    
-    def _setup_simulator(self):
-        pygame.init()
-        resolution = (1000, 50)
+        self.num = num
 
-        self.display = pygame.display.set_mode(resolution)
-        pygame.display.set_caption('PyLEDServer Simulator')
+        self._initialize_empty_strip()
 
-    def _run_simulator(self):
-        self._setup_simulator()
+        subprocess.Popen(['python', '{}/simulator/sim.py'.format(os.getcwd())])
 
-        while True:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    return
-            pygame.display.flip()
+    def setPixelColorRGB(self, n, r, g, b):
+        logger.debug('Setting pixel color')
 
-    def show(self):
-        print('skunk')
-        pygame.display.set_caption('swag money')
+        leds = self.get_strip()
 
+        leds["leds"][n - 1] = {"r": r, "g": g, "b": b}
+
+        self.set_strip(leds)
+
+    def get_strip(self,):
+        logger.debug('Getting strip values')
+
+        leds = {}
+
+        with open('leds.json', 'r') as f:
+            leds = json.load(f)
+
+        return leds
+
+    def set_strip(self, leds):
+        logger.debug('Setting strip values')
+
+        with open('leds.json', 'w') as f:
+            f.write(json.dumps(leds, indent=4))
+
+    def _initialize_empty_strip(self):
+        logger.debug('Initializing empty strip file')
+
+        json_leds = {"leds": []}
+        """ JSON structure:
+        {
+            "leds": [
+                {"r": 0, "g": 0, "b": 0},
+                {"r": 0, "g": 0, "b": 0},
+                ...
+            ]
+        }
+        """
+
+        for _ in range(self.num):
+            json_leds["leds"].append({"r": 0, "g": 0, "b": 0})
+
+        with open('leds.json', 'w') as f:
+            f.write(json.dumps(json_leds))
 
 if __name__ == '__main__':
     strip = VirtualStrip(60)
-
-    strip.thread.start()
+    strip.setPixelColorRGB(1, 255, 0, 0)
+    strip.setPixelColorRGB(2, 0, 255, 0)
+    strip.setPixelColorRGB(3, 0, 0, 255)
+    strip.setPixelColorRGB(4, 255, 255, 255)
+    # strip.thread.start()

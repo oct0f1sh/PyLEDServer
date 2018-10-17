@@ -1,6 +1,7 @@
 import logging
 
 from strip.basestrip import BaseStrip
+from strip.virtualstrip import VirtualStrip
 
 logger = logging.getLogger('pyledserver.LEDStrip')
 logger.setLevel(logging.DEBUG)
@@ -29,4 +30,7 @@ class LEDStrip(BaseStrip):
         
         else:
             # initialize as virtual led strip
-            super().__init__(num, pin)
+            # TODO: Find a better way to do this, this is kinda confusing with
+            # different object names like VirtualStrip and LEDStrip
+            self = VirtualStrip(num)
+            # self = super().__init__(num, 0)
