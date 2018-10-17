@@ -47,7 +47,7 @@ class PluginManager(object):
                                 logger.exception('Plugin: \"{}\" contains a space in the identifier, ignoring...'.format(plugin_class))
 
             except ModuleNotFoundError:
-                            logger.warning('Could not load plugin: {}'.format(plugin))
+                            logger.info('Could not load plugin: {}'.format(plugin))
 
     def get_plugin_thread(self, identifier, args, led_strip):
         if ' ' in identifier:

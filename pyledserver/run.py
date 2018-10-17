@@ -1,10 +1,11 @@
+import argparse
 import json
 import logging
-import argparse
 
-from strip.ledstrip import LEDStrip
-from utils.credentials import CredentialsContainer
 from mqtt.client import PyLEDClient
+from strip.ledstrip import LEDStrip
+from strip.virtualstrip import VirtualStrip
+from utils.credentials import CredentialsContainer
 
 LED_COUNT = 60
 LED_PIN = 18
@@ -38,7 +39,7 @@ logger.addHandler(ch)
 if __name__ == "__main__":
     if is_debug:
         client_id = 'pyledserver_debug'
-        led_strip = LEDStrip(num=LED_COUNT, pin=None)
+        led_strip = VirtualStrip(LED_COUNT)
     else:
         client_id = 'pyledserver_rpi'
         led_strip = LEDStrip(num=LED_COUNT, pin=LED_PIN)

@@ -1,36 +1,27 @@
 import logging
 
 from strip.basestrip import BaseStrip
-from strip.virtualstrip import VirtualStrip
 
 logger = logging.getLogger('pyledserver.LEDStrip')
 logger.setLevel(logging.DEBUG)
 
 class LEDStrip(BaseStrip):
     def __init__(self, num, pin):
-        if pin:
-            # import HW interface library and initialize strip object
-            from neopixel import Adafruit_NeoPixel, ws
+        # import HW interface library and initialize strip object
+        from neopixel import Adafruit_NeoPixel, ws
 
-            led_freq_hz    = 800000  # LED signal frequency in hertz (usually 800khz)
-            led_dma        = 10      # DMA channel to use for generating signal (try 10)
-            led_brightness = 255     # Set to 0 for darkest and 255 for brightest
-            led_invert     = False   # True to invert the signal (when using NPN transistor level shift)
-            led_channel    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
-            led_strip      = ws.WS2811_STRIP_GRB   # Strip type and colour ordering
+        led_freq_hz    = 800000  # LED signal frequency in hertz (usually 800khz)
+        led_dma        = 10      # DMA channel to use for generating signal (try 10)
+        led_brightness = 255     # Set to 0 for darkest and 255 for brightest
+        led_invert     = False   # True to invert the signal (when using NPN transistor level shift)
+        led_channel    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
+        led_strip      = ws.WS2811_STRIP_GRB   # Strip type and colour ordering
 
-            self = Adafruit_NeoPixel(self.num,
-                                     self.pin,
-                                     led_freq_hz,
-                                     led_dma,
-                                     led_invert,
-                                     led_brightness,
-                                     led_channel,
-                                     led_strip)
-        
-        else:
-            # initialize as virtual led strip
-            # TODO: Find a better way to do this, this is kinda confusing with
-            # different object names like VirtualStrip and LEDStrip
-            self = VirtualStrip(num)
-            # self = super().__init__(num, 0)
+        self = Adafruit_NeoPixel(self.num,
+                                    self.pin,
+                                    led_freq_hz,
+                                    led_dma,
+                                    led_invert,
+                                    led_brightness,
+                                    led_channel,
+                                    led_strip)

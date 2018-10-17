@@ -1,10 +1,6 @@
-try:
-    from neopixel import Color
-except ImportError:
-    from debugColor import Color
 import json
-from time import sleep
 import threading
+from time import sleep
 
 class MovingDotThread(threading.Thread):
     """ moves a dot back and fourth until cancelled """
@@ -56,8 +52,8 @@ class MovingDotThread(threading.Thread):
             self.b = 0
 
     def run(self):
-        color = Color(self.r, self.g, self.b)
-        off = Color(0, 0, 0)
+        color = (self.r, self.g, self.b)
+        off = (0, 0, 0)
 
         pixels = self.led_strip.num_pixels
 
@@ -68,39 +64,24 @@ class MovingDotThread(threading.Thread):
 
         while not self.should_stop:
             if i == 0 and not forwards:
-                self.led_strip.strip.setPixelColor(i + 1, off)
-                self.led_strip.strip.setPixelColor(i, color)
+                self.led_strip.setPixelColorRGB(i + 1, *off)
+                self.led_strip.setPixelColorRGB(i, *color)
                 forwards = True
                 i += 1
             elif i == pixels - 1:
-                self.led_strip.strip.setPixelColor(i - 1, off)
-                self.led_strip.strip.setPixelColor(i, color)
+                self.led_strip.setPixelColorRGB(i - 1, *off)
+                self.led_strip.setPixelColorRGB(i, *color)
                 forwards = False
                 i -= 1
             else:
                 if forwards:
-                    self.led_strip.strip.setPixelColor(i - 1, off)
-                    self.led_strip.strip.setPixelColor(i, color)
+                    self.led_strip.setPixelColorRGB(i - 1, *off)
+                    self.led_strip.setPixelColorRGB(i, *color)
                     i += 1
                 else:
-                    self.led_strip.strip.setPixelColor(i + 1, off)
-                    self.led_strip.strip.setPixelColor(i, color)
+                    self.led_strip.setPixelColorRGB(i + 1, *off)
+                    self.led_strip.setPixelColorRGB(i, *color)
                     i -= 1
 
-            self.led_strip.strip.show()
+            self.led_strip.show()
             sleep(led_sleep_duration)
-
-    def no_run(self):
-        num_points = 4
-
-        bulge = []
-
-        for i in reversed(range(1, num_points * 10, 10)):
-            bulge.append(Color(self.r / i, self.g / i, self.b / i))
-
-        bulge.extend(bulge[1::-1])
-
-        for _ in range(self.led_strip.num_pixels - len(bulge)):
-            bulge.append(Color(0, 0, 0))
-
-        self.led_strip.set_pattern(bulge)

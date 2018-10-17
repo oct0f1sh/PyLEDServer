@@ -9,7 +9,7 @@ class BaseStrip(object):
     def __init__(self, num, pin, freq_hz=None, dma=None, invert=None, brightness=None, channel=None, strip_type=None):
         logger.info('Initialized dummy strip')
         
-        self.num = num
+        self.num_pixels = num
         self.pin = pin
 
     def _cleanup(self):
@@ -38,8 +38,6 @@ class BaseStrip(object):
 
     def numPixels(self):
         logger.debug('numPixels method')
-
-        return self.num
 
     def getPixelColor(self, n):
         logger.debug('getPixelColor method')

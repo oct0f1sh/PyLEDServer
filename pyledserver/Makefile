@@ -12,6 +12,7 @@ lint:
 .PHONY: run-debug
 run-debug:
 	python run.py --debug
+	echo ahhhh
 
 .PHONY: run
 run:

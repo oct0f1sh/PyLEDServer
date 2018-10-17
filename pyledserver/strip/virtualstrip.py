@@ -13,7 +13,7 @@ class VirtualStrip(BaseStrip):
     def __init__(self, num):
         logger.info('Initialized virtual LED strip')
 
-        self.num = num
+        self.num_pixels = num
 
         self._initialize_empty_strip()
 
@@ -28,7 +28,7 @@ class VirtualStrip(BaseStrip):
 
         self.set_strip(leds)
 
-    def get_strip(self,):
+    def get_strip(self):
         logger.debug('Getting strip values')
 
         leds = {}
@@ -58,7 +58,7 @@ class VirtualStrip(BaseStrip):
         }
         """
 
-        for _ in range(self.num):
+        for _ in range(self.num_pixels):
             json_leds["leds"].append({"r": 0, "g": 0, "b": 0})
 
         with open('leds.json', 'w') as f:
