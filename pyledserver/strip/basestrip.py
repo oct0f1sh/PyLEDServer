@@ -1,4 +1,5 @@
-# dummy version of https://github.com/jgarff/rpi_ws281x/blob/master/python/neopixel.py
+# Structure is based on https://github.com/jgarff/rpi_ws281x/blob/master/python/neopixel.py
+# TODO: Add more description
 
 import logging
 

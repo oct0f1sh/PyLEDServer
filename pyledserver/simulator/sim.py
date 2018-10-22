@@ -25,10 +25,13 @@ def get_strip():
     """ Reads LED strip values from 'leds.json' file """
     logger.debug('Getting strip values')
 
-    leds = {}
+    leds = {"leds": []}
 
-    with open('leds.json', 'r') as f:
-        leds = json.load(f)
+    try:
+        with open('leds.json', 'r') as f:
+            leds = json.load(f)
+    except json.JSONDecodeError:
+        pass
 
     return leds
 
@@ -60,4 +63,4 @@ while True:
     draw_leds()
 
     pygame.display.flip()
-    clock.tick(60)
+    clock.tick(30)

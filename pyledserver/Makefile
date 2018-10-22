@@ -9,10 +9,9 @@ clean:
 lint:
 	flake8
 
-.PHONY: run-debug
-run-debug:
+.PHONY: debug
+debug:
 	python run.py --debug
-	echo ahhhh
 
 .PHONY: run
 run:

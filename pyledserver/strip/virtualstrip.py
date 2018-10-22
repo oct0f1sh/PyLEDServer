@@ -15,6 +15,8 @@ class VirtualStrip(BaseStrip):
 
         self.num_pixels = num
 
+        # self.leds = self.create_empty_led_dict()
+        # make it clean that it has a return value
         self._initialize_empty_strip()
 
         subprocess.Popen(['python', '{}/simulator/sim.py'.format(os.getcwd())])
