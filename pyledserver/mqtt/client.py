@@ -28,7 +28,7 @@ class PyLEDClient(mqtt.Client):
         self.connect(credentials.mqtt_url, int(credentials.mqtt_port))
         self.subscribe(mqtt_topic, 0)
 
-        success = {'message': 'successfully started client',
+        success = {'message': 'welcome',
                    'args': {}}
 
         # publish connection message to ensure successful connection

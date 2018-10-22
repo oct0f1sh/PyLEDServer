@@ -41,7 +41,7 @@ if __name__ == "__main__":
     # TODO: add argument for logging level with same level words like DEBUG or INFO
     # parser.add_argument(...)
     # parse arguments
-    # args = parser.parse_args()
+    args = parser.parse_args()
     # log_levels = {'info': logging.INFO, 'debug': logging.DEBUG, ...}
     # log_level = log_levels[args.log_level]
 

@@ -1,6 +1,10 @@
 import json
 import threading
+import logging
 from time import sleep
+
+logger = logging.getLogger('pyledserver.plugins.MovingDotThread')
+logger.setLevel(logging.DEBUG)
 
 class MovingDotThread(threading.Thread):
     """ moves a dot back and fourth until cancelled """
@@ -15,7 +19,7 @@ class MovingDotThread(threading.Thread):
     p_identifier = 'ping_pong'
     p_name = 'Moving Dot'
     p_author = 'oct0f1sh'
-    p_expected_args = {'r': 'int', 'g': 'int', 'b': 'int', 'duration': 'int'}
+    p_expected_args = {'r': int, 'g': int, 'b': int, 'duration': int}
 
     def __init__(self, led_strip, json_args):
         super(MovingDotThread, self).__init__()
@@ -26,13 +30,13 @@ class MovingDotThread(threading.Thread):
             g = int(json_args['g'])
             b = int(json_args['b'])
         except (KeyError, ValueError) as err:
-            print('MovingDotThread - INVALID RGB ARGUMENTS: {}'.format(err))
+            logger.error('MovingDotThread - INVALID RGB ARGUMENTS: {}'.format(err))
             raise
 
         try:
             self.duration = int(json_args['duration'])
         except (KeyError, ValueError) as err:
-            print('MovingDotThread - INVALID DURATION VALUE')
+            logger.error('MovingDotThread - INVALID DURATION VALUE')
             raise
 
         self.led_strip = led_strip
@@ -58,7 +62,6 @@ class MovingDotThread(threading.Thread):
         pixels = self.led_strip.num_pixels
 
         led_sleep_duration = float(self.duration) / float(pixels)
-
         i = 1
         forwards = True
 

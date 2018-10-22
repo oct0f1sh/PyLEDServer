@@ -1,10 +1,10 @@
-try:
-    from neopixel import Color
-except ImportError:
-    from debugColor import Color
 import json
-from time import sleep, time
+import logging
 import threading
+from time import sleep, time
+
+logger = logging.getLogger('pyledserver.plugins.TimerThread')
+logger.setLevel(logging.DEBUG)
 
 class TimerThread(threading.Thread):
     """ visual timer """
@@ -17,7 +17,7 @@ class TimerThread(threading.Thread):
     p_identifier = 'timer'
     p_name = 'Timer'
     p_author = 'oct0f1sh'
-    p_expected_args = {'minutes': 'int', 'seconds': 'int'}
+    p_expected_args = {'minutes': int, 'seconds': int}
 
     def __init__(self, led_strip, json_args):
         super(TimerThread, self).__init__()
@@ -27,20 +27,22 @@ class TimerThread(threading.Thread):
             self.minutes = int(json_args['minutes'])
             self.seconds = int(json_args['seconds'])
         except (KeyError, ValueError) as err:
-            print('TimerThread - INVALID MINUTES/SECONDS ARGUMENTS')
+            logger.error('Invalid or missing minutes or seconds value')
             raise
 
         self.led_strip = led_strip
 
     def run(self):
-        self.led_strip.wipe_strip(Color(0, 255, 0))
+        green = (0, 255, 0)
+        red = (255, 0, 0)
+        off = (0, 0, 0)
 
-        off = Color(0, 0, 0)
+        self.led_strip.setStripColorRGB(*green)
 
         pixels = self.led_strip.num_pixels
 
         total_seconds = (self.minutes * 60) + self.seconds
-        print('TOTAL SECONDS: {}'.format(total_seconds))
+        logger.debug('TOTAL SECONDS: {}'.format(total_seconds))
 
         leds_off = 0
 
@@ -60,14 +62,14 @@ class TimerThread(threading.Thread):
 
                 rec_time = time() - overlap
 
-                self.led_strip.strip.setPixelColor((pixels - leds_off), off)
-                self.led_strip.strip.show()
+                self.led_strip.setPixelColorRGB((pixels - leds_off), *off)
+                self.led_strip.show()
 
                 if leds_off == pixels:
-                    print(total_inaccuracy)
-                    print('TIME ELAPSED: {:.4f} seconds, INACCURACY: {:.4f} seconds'.format(float(time() - start_time), float(total_inaccuracy)))
+                    # logger.debug('Inaccuracy: {}'.format(total_inaccuracy))
+                    logger.debug('Time elapsed: {:.4f} seconds, Inaccuracy: {:.4f} seconds'.format(float(time() - start_time), float(total_inaccuracy)))
                     break
                 else:
                     leds_off += 1
 
-        self.led_strip.wipe_strip(Color(255, 0, 0))
+        self.led_strip.setStripColorRGB(*red)

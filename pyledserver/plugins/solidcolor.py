@@ -1,10 +1,10 @@
-try:
-    from neopixel import Color
-except ImportError:
-    from debugColor import Color
 import json
-from time import sleep
+import logging
 import threading
+from time import sleep
+
+logger = logging.getLogger('pyledserver.plugins.LEDSolidColorThread')
+logger.setLevel(logging.DEBUG)
 
 class LEDSolidColorThread(threading.Thread):
     """ sets strip to one solid color """
@@ -19,7 +19,7 @@ class LEDSolidColorThread(threading.Thread):
     p_identifier = 'solid_color' # MUST NOT CONTAIN SPACES
     p_name = 'LED Solid Color'
     p_author = 'oct0f1sh'
-    p_expected_args = {'r': 'int', 'g': 'int', 'b': 'int', 'duration': 'int'}
+    p_expected_args = {'r': int, 'g': int, 'b': int, 'duration': int}
 
     def __init__(self, led_strip, json_args):
         super(LEDSolidColorThread, self).__init__()
@@ -30,13 +30,13 @@ class LEDSolidColorThread(threading.Thread):
             g = int(json_args['g'])
             b = int(json_args['b'])
         except (KeyError, ValueError) as err:
-            print('LEDSolidColorThread - INVALID RGB ARGUMENTS: {}'.format(err))
+            logger.error('Invalid or missing RGB values'.format(err))
             raise
 
         try:
             self.duration = int(json_args['duration'])
         except (KeyError, ValueError) as err:
-            print('LEDSolidColorThread - INVALID DURATION VALUE')
+            logger.error('Invalid duration value')
             raise
 
         self.led_strip = led_strip
@@ -56,21 +56,21 @@ class LEDSolidColorThread(threading.Thread):
             self.b = 0
 
     def run(self):
-        color = Color(self.r, self.g, self.b)
+        color = (self.r, self.g, self.b)
 
         pixels = self.led_strip.num_pixels
 
         led_sleep_duration = float(self.duration) / float(pixels)
 
-        for i in range(pixels):
+        for i in range(1, pixels + 1):
             if self.should_stop:
                 break
 
-            self.led_strip.strip.setPixelColor(i, color)
+            self.led_strip.setPixelColorRGB(i, *color)
 
             if self.duration != 0:
-                self.led_strip.strip.show()
+                self.led_strip.show()
                 sleep(led_sleep_duration)
         
         if self.duration == 0:
-            self.led_strip.strip.show()
+            self.led_strip.show()
