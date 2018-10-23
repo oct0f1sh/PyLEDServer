@@ -49,7 +49,7 @@ class BaseStrip(object):
         logger.debug('getPixels method')
 
     def numPixels(self):
-        logger.debug('numPixels method')
+        return self.num
 
     def getPixelColor(self, n):
         logger.debug('getPixelColor method')

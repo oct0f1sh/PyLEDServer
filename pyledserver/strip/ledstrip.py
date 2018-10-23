@@ -25,3 +25,5 @@ class LEDStrip(BaseStrip):
                                  led_brightness,
                                  led_channel,
                                  led_strip)
+
+        self.num_pixels = num
