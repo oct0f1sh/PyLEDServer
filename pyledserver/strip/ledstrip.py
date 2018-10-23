@@ -28,4 +28,4 @@ class LEDStrip(BaseStrip):
                                  led_channel,
                                  led_strip)
 
-        self.setPixelColorRGB(1, 255, 0, 0)
+        # self.setPixelColorRGB(1, 255, 0, 0)
