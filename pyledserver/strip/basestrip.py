@@ -10,8 +10,13 @@ class BaseStrip(object):
     def __init__(self, num, pin, freq_hz=None, dma=None, invert=None, brightness=None, channel=None, strip_type=None):
         logger.info('Initialized dummy strip')
         
-        self.num_pixels = num
+        # TODO: change self.num to self.num_pixels and make this less weird
+        self.num = num
         self.pin = pin
+
+    @property
+    def num_pixels(self):
+        return self.num
 
     def _cleanup(self):
         logger.debug('_cleanup method')

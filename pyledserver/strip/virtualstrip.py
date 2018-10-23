@@ -13,7 +13,7 @@ class VirtualStrip(BaseStrip):
     def __init__(self, num):
         logger.info('Initialized virtual LED strip')
 
-        self.num_pixels = num
+        self.num = num
 
         # self.leds = self.create_empty_led_dict()
         # make it clean that it has a return value
