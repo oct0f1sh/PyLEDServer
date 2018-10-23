@@ -34,8 +34,10 @@ class WelcomeThread(threading.Thread):
     def __init__(self, led_strip, json_args):
         super(WelcomeThread, self).__init__()
 
-        try:
-            self.start = Color(major)
+        # try:
+        #     self.start = Color(major)
+        # except:
+            
 
         self.led_strip = led_strip
         self.should_stop = False
@@ -68,5 +70,5 @@ class WelcomeThread(threading.Thread):
         """ Change RGB value of range from 0 - 1 to 0 - 255 """
         return (rgb[0] * 255, rgb[1] * 255, rgb[2] * 255)
 
-    def minor_to_major(self, rgb):
+    def major_to_minor(self, rgb):
         return (rgb[0] / 255, rgb[1] / 255, rgb[2] / 255)
