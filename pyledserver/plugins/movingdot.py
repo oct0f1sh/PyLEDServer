@@ -35,8 +35,6 @@ class MovingDotThread(threading.Thread):
 
         try:
             self.duration = int(json_args['duration'])
-            print(self.duration)
-            print('#########################')
         except (KeyError, ValueError) as err:
             logger.error('MovingDotThread - INVALID DURATION VALUE')
             raise
@@ -61,7 +59,7 @@ class MovingDotThread(threading.Thread):
         color = (self.r, self.g, self.b)
         off = (0, 0, 0)
 
-        pixels = self.led_strip.numPixels()
+        pixels = self.led_strip.num_pixels
 
         led_sleep_duration = float(self.duration) / float(pixels)
         i = 1
