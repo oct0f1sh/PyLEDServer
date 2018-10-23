@@ -35,6 +35,8 @@ class MovingDotThread(threading.Thread):
 
         try:
             self.duration = int(json_args['duration'])
+            print(self.duration)
+            print('#########################')
         except (KeyError, ValueError) as err:
             logger.error('MovingDotThread - INVALID DURATION VALUE')
             raise
