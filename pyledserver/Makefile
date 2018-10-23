@@ -11,8 +11,8 @@ lint:
 
 .PHONY: debug
 debug:
-	python run.py --debug
+	python3 run.py --debug
 
 .PHONY: run
 run:
-	python run.py
+	sudo python3 run.py
