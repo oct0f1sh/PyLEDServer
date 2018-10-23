@@ -65,7 +65,7 @@ class CallbackContainer(object):
     def on_message(self, client, obj, msg):
         try:
             logger.debug('Checking if JSON')
-            message = json.loads(msg.payload)
+            message = json.loads(msg.payload.decode('utf-8'))
         except ValueError:
             logger.exception('Error processing message into JSON')
             return
