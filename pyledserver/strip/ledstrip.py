@@ -17,11 +17,11 @@ class LEDStrip(BaseStrip):
         led_channel    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
         led_strip      = ws.WS2811_STRIP_GRB   # Strip type and colour ordering
 
-        self = Adafruit_NeoPixel(self.num,
-                                    self.pin,
-                                    led_freq_hz,
-                                    led_dma,
-                                    led_invert,
-                                    led_brightness,
-                                    led_channel,
-                                    led_strip)
+        self = Adafruit_NeoPixel(num,
+                                 pin,
+                                 led_freq_hz,
+                                 led_dma,
+                                 led_invert,
+                                 led_brightness,
+                                 led_channel,
+                                 led_strip)
