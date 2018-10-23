@@ -59,7 +59,7 @@ class MovingDotThread(threading.Thread):
         color = (self.r, self.g, self.b)
         off = (0, 0, 0)
 
-        pixels = self.led_strip.num_pixels
+        pixels = self.led_strip.numPixels()
 
         led_sleep_duration = float(self.duration) / float(pixels)
         i = 1

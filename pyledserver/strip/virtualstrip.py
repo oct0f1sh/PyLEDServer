@@ -10,13 +10,13 @@ logger = logging.getLogger('pyledserver.VirtualStrip')
 logger.setLevel(logging.INFO)
 
 class VirtualStrip(BaseStrip):
-    def __init__(self, num):
+    def __init__(self, num_pixels):
         logger.info('Initialized virtual LED strip')
 
-        self.num = num
+        self.num_pixels = num_pixels
 
         # self.leds = self.create_empty_led_dict()
-        # make it clean that it has a return value
+        # make it clear that it has a return value
         self._initialize_empty_strip()
 
         subprocess.Popen(['python', '{}/simulator/sim.py'.format(os.getcwd())])

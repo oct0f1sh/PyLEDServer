@@ -11,8 +11,8 @@ class BaseStrip(object):
         logger.info('Initialized dummy strip')
         
         # TODO: change self.num to self.num_pixels and make this less weird
-        self.num_pixels = num
-        self.pin = pin
+        # self.num_pixels = num
+        # self.pin = pin
 
     def _cleanup(self):
         logger.debug('_cleanup method')
@@ -45,7 +45,7 @@ class BaseStrip(object):
         logger.debug('getPixels method')
 
     def numPixels(self):
-        return self.num
+        logger.debug('numPixels method')
 
     def getPixelColor(self, n):
         logger.debug('getPixelColor method')
