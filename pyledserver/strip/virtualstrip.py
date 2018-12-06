@@ -19,7 +19,7 @@ class VirtualStrip(BaseStrip):
         # make it clear that it has a return value
         self._initialize_empty_strip()
 
-        subprocess.Popen(['python', '{}/simulator/sim.py'.format(os.getcwd())])
+        subprocess.Popen(['python3', '{}/simulator/sim.py'.format(os.getcwd())])
 
     def setPixelColorRGB(self, n, r, g, b):
         logger.debug('Setting pixel color')
