@@ -53,14 +53,14 @@ class CredentialsContainer(object):
 
                     # validate that all credentials were found
                     # TODO: This doesn't actually work, so make it work
-                    if not self.mqtt_url:
-                        logger.error('Missing mqtt_url in user_info.txt')
-                    if not self.mqtt_username:
-                        logger.error('Missing mqtt_username in user_info.txt')
-                    if not self.mqtt_password:
-                        logger.error('Missing mqtt_password in user_info.txt')
-                    if not self.mqtt_port:
-                        logger.error('Missing mqtt_port in user_info.txt')
+                    # if self.mqtt_url:
+                    #     logger.error('Missing mqtt_url in user_info.txt')
+                    # if self.mqtt_username:
+                    #     logger.error('Missing mqtt_username in user_info.txt')
+                    # if self.mqtt_password:
+                    #     logger.error('Missing mqtt_password in user_info.txt')
+                    # if self.mqtt_port:
+                    #     logger.error('Missing mqtt_port in user_info.txt')
 
             except IOError:
                 logger.exception('Could not open user_info.txt')
