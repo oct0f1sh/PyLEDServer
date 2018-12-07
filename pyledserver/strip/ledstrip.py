@@ -23,11 +23,11 @@ class LEDStrip(BaseStrip):
 
         self.num_pixels = num
 
-        self = neopixel.NeoPixel(led_pin, self.num_pixels, brightness=1, auto_write=False, pixel_order=order)
+        self.strip = neopixel.NeoPixel(led_pin, self.num_pixels, brightness=1, auto_write=False, pixel_order=order)
 
         logger.debug('Setting LED strip')
 
-        self.fill((255, 0, 0))
+        self.strip.fill((255, 0, 0))
         self.show()
 
         # self.setPixelColorRGB(1, 255, 0, 0)

@@ -25,11 +25,11 @@ class BaseStrip(object):
 
     def setPixelColor(self, n, color):
         logger.debug('setPixelColor method')
-        self[n] = color
+        self.strip[n] = color
 
     def setPixelColorRGB(self, n, red, green, blue, white=0):
         logger.debug('setPixelColorRGB method')
-        self[n] = (red, green, blue)
+        self.strip[n] = (red, green, blue)
 
     def setStripColorRGB(self, red, green, blue, white=0):
         for i in range(1, self.num_pixels + 1):
