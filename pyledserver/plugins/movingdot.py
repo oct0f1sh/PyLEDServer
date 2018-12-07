@@ -62,16 +62,16 @@ class MovingDotThread(threading.Thread):
         pixels = self.led_strip.num_pixels
 
         led_sleep_duration = float(self.duration) / float(pixels)
-        i = 1
+        i = 0
         forwards = True
 
         while not self.should_stop:
-            if i == 1 and not forwards:
+            if i == 0 and not forwards:
                 self.led_strip.setPixelColorRGB(i, *off)
                 self.led_strip.setPixelColorRGB(i, *color)
                 forwards = True
                 i += 1
-            elif i == pixels:
+            elif i == pixels - 1:
                 self.led_strip.setPixelColorRGB(i, *off)
                 self.led_strip.setPixelColorRGB(i, *color)
                 forwards = False
