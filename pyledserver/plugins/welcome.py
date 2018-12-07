@@ -6,7 +6,7 @@ from time import sleep
 from colour import Color
 
 logger = logging.getLogger('pyledserver.plugins.LEDSolidColorThread')
-logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.INFO)
 
 class WelcomeThread(threading.Thread):
     """ Feedback to show that LED strip has been initialized successfully.
@@ -47,6 +47,8 @@ class WelcomeThread(threading.Thread):
             end_g = end_json['g']
             end_b = end_json['b']
             self.end_color = Color(rgb=(self.major_to_minor((end_r, end_g, end_b))))
+
+            self.duration = json_args['duration']
         except (KeyError, ValueError) as err:
             logger.error('Invalid or missing start/end RGB values')
             raise
@@ -54,12 +56,10 @@ class WelcomeThread(threading.Thread):
         self.led_strip = led_strip
 
     def run(self):
-        seconds = 2
-
         off = (0,0,0)
 
         cols = list(self.start_color.range_to(self.end_color, self.led_strip.num_pixels))
-        iteration_length = seconds / self.led_strip.num_pixels
+        iteration_length = self.duration / self.led_strip.num_pixels
 
         logger.debug('Iteration length: {}'.format(iteration_length))
 
