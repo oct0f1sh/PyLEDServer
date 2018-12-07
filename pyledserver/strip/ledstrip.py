@@ -3,7 +3,7 @@ import logging
 from strip.basestrip import BaseStrip
 
 # logger = logging.getLogger('pyledserver.LEDStrip')
-logger = logging.getLogger('pyledserver.Ufasdfr')
+logger = logging.getLogger('pyledserver.strip.LEDStrip')
 logger.setLevel(logging.DEBUG)
 
 class LEDStrip(BaseStrip):

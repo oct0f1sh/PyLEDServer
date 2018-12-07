@@ -3,7 +3,7 @@
 
 import logging
 
-logger = logging.getLogger('pyledserver.BaseStrip')
+logger = logging.getLogger('pyledserver.strip.BaseStrip')
 logger.setLevel(logging.INFO)
 
 class BaseStrip(object):
