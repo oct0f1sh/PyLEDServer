@@ -28,7 +28,8 @@ class LEDStrip(BaseStrip):
         logger.debug('Setting LED strip')
 
         self.strip.fill((0,0,0))
-        self.setPixelColorRGB(0, 255, 0, 0)
+        self.strip[0] = (255, 0, 0)
+        self.strip[1] = (0, 0, 255)
         self.show()
 
         # self.setPixelColorRGB(1, 255, 0, 0)
