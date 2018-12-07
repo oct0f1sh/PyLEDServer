@@ -42,7 +42,7 @@ class ChristmasThread(threading.Thread):
             for i in range(pixels):
 
                 if i % 2 == 0:
-                    self.led_strip.setPixelColorRGB(i, *green if odd else *red)
+                    self.led_strip.setPixelColor(i, green if odd else red)
 
             odd = !odd
                 
