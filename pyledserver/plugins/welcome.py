@@ -57,12 +57,12 @@ class WelcomeThread(threading.Thread):
         for i, col in enumerate(cols):
             rgb = self.minor_to_major(col.rgb)
 
-            self.led_strip.setPixelColorRGB(i + 1, *rgb)
+            self.led_strip.setPixelColorRGB(i, *rgb)
 
             sleep(iteration_length)
 
         for i, col in enumerate(cols):
-            self.led_strip.setPixelColorRGB(i + 1, *off)
+            self.led_strip.setPixelColorRGB(i, *off)
 
             sleep(iteration_length)
 
