@@ -29,7 +29,19 @@ class PyLEDClient(mqtt.Client):
         self.subscribe(mqtt_topic, 0)
 
         success = {'message': 'gradient',
-                   'args': {}}
+                   'args': {
+                       "start": {
+                           "r": 255,
+                           "g": 0,
+                           "b": 0 
+                        },
+                        "end": {
+                            "r": 0,
+                            "g": 255,
+                            "b": 0
+                        },
+                        "duration": 2
+                   }}
 
         # publish connection message to ensure successful connection
         self.publish(mqtt_topic, json.dumps(success, ensure_ascii=True))
