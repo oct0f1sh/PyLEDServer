@@ -51,7 +51,7 @@ class WelcomeThread(threading.Thread):
             self.duration = json_args['duration']
             self.disappear = bool(json_args['disappear'])
         except (KeyError, ValueError) as err:
-            logger.error('Invalid or missing start/end RGB values')
+            logger.error('Invalid JSON format')
             raise
 
         self.led_strip = led_strip
