@@ -91,7 +91,7 @@ class CallbackContainer(object):
         payload = message['message']
         args = message['args']
 
-        # TODO: reset strip to blank slate
+        self.led_strip.setStripColorRGB(0, 0, 0)
 
         # run plugin specified in message
         try:

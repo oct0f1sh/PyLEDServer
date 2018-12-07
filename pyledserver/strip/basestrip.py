@@ -33,8 +33,7 @@ class BaseStrip(object):
         self.strip[n] = (int(red), int(green), int(blue))
 
     def setStripColorRGB(self, red, green, blue, white=0):
-        for i in range(1, self.num_pixels + 1):
-            self.setPixelColorRGB(i, red, green, blue)
+        self.strip.fill((int(red), int(green), int(blue)))
 
         self.show()
 
