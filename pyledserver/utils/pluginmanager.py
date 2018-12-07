@@ -5,7 +5,7 @@ import threading
 
 import plugins
 
-logger = logging.getLogger('pyledserver.PluginManager')
+logger = logging.getLogger('pyledserver.utils.PluginManager')
 logger.setLevel(logging.INFO)
 
 class PluginInfo(object):

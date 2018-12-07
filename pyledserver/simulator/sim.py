@@ -7,8 +7,6 @@ import pygame
 logger = logging.getLogger('pyledserver.simulator.Sim')
 logger.setLevel(logging.DEBUG)
 
-print('donezo')
-
 pygame.init()
 
 # create display and set background to white

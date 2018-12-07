@@ -4,7 +4,7 @@ import logging
 import mqtt.callbacks as mqtt_util
 import paho.mqtt.client as mqtt
 
-logger = logging.getLogger('pyledserver.PyLEDClient')
+logger = logging.getLogger('pyledserver.mqtt.PyLEDClient')
 logger.setLevel(logging.DEBUG)
 
 class PyLEDClient(mqtt.Client):

@@ -6,7 +6,7 @@ import os
 
 from strip.basestrip import BaseStrip
 
-logger = logging.getLogger('pyledserver.VirtualStrip')
+logger = logging.getLogger('pyledserver.strip.VirtualStrip')
 logger.setLevel(logging.INFO)
 
 class VirtualStrip(BaseStrip):

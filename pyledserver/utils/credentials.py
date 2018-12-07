@@ -1,7 +1,7 @@
 import os.path
 import logging
 
-logger = logging.getLogger('pyledserver.utils.User')
+logger = logging.getLogger('pyledserver.utils.CredentialsContainer')
 logger.setLevel(logging.INFO)
 
 class CredentialsContainer(object):

@@ -4,7 +4,7 @@ import threading
 
 from utils.pluginmanager import PluginManager
 
-logger = logging.getLogger('pyledserver.CallbackContainer')
+logger = logging.getLogger('pyledserver.mqtt.CallbackContainer')
 logger.setLevel(logging.INFO)
 
 class CallbackContainer(object):
