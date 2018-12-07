@@ -49,6 +49,7 @@ class WelcomeThread(threading.Thread):
             self.end_color = Color(rgb=(self.major_to_minor((end_r, end_g, end_b))))
         except (KeyError, ValueError) as err:
             logger.error('Invalid or missing start/end RGB values')
+            raise
 
         self.led_strip = led_strip
 
