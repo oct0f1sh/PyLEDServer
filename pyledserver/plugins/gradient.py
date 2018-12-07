@@ -72,13 +72,12 @@ class WelcomeThread(threading.Thread):
 
             sleep(iteration_length)
 
-        if self.disappear {
+        if self.disappear:
             for i, col in enumerate(cols):
                 self.led_strip.setPixelColorRGB(i, *off)
                 self.led_strip.show()
 
                 sleep(iteration_length)
-        }
 
 
     def minor_to_major(self, rgb):
