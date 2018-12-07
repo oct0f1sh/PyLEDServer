@@ -62,7 +62,7 @@ class LEDSolidColorThread(threading.Thread):
 
         led_sleep_duration = float(self.duration) / float(pixels)
 
-        for i in range(1, pixels + 1):
+        for i in range(pixels):
             if self.should_stop:
                 break
 
