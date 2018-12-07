@@ -45,4 +45,5 @@ class ChristmasThread(threading.Thread):
                     self.led_strip.setPixelColor(i, green if odd else red)
 
             odd = not odd
+            self.led_strip.show()
                 
