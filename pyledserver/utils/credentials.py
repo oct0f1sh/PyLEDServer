@@ -28,7 +28,7 @@ class CredentialsContainer(object):
 
                     for line in f:
                         # if line is not a comment
-                        if '\#\#' not in line and line.isprintable(): 
+                        if '\#\#' not in line and len(line) > 1: 
                             info = line.split('=')
 
                             try:
