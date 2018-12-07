@@ -4,8 +4,10 @@ import sys
 
 import pygame
 
-logger = logging.getLogger('pyledserver.simulator.sim')
+logger = logging.getLogger('pyledserver.simulator.Sim')
 logger.setLevel(logging.DEBUG)
+
+print('donezo')
 
 pygame.init()
 
@@ -37,6 +39,8 @@ def get_strip():
 
 def draw_leds():
     """ Saves LED strip values to 'leds.json' file """
+    logger.debug('Drawing LEDs')
+
     strip = get_strip()
 
     old_pos = (5,5)
