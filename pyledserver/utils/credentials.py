@@ -36,6 +36,7 @@ class CredentialsContainer(object):
                                 credential = info[1][:-1]
                             except IndexError as err:
                                 logger.error('Error parsing credentials: {}'.format(err))
+                                logger.error(info)
 
                             if descriptor == 'mqtt_url':
                                 self.mqtt_url = credential
