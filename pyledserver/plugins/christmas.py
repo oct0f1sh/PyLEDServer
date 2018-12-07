@@ -13,7 +13,7 @@ class ChristmasThread(threading.Thread):
         'duration': seconds between swap
     }
     """
-    p_identifier = 'solid_color'
+    p_identifier = 'christmas'
     p_name = 'Christmas Lights'
     p_author = 'oct0f1sh'
     p_expected_args = {'duration': int}
