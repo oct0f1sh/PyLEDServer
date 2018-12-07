@@ -27,7 +27,7 @@ class WelcomeThread(threading.Thread):
     }
     """
     p_identifier = 'gradient' # MUST NOT CONTAIN SPACES
-    p_name = 'Test LED functionality'
+    p_name = 'Display a gradient between two colors'
     p_author = 'oct0f1sh'
     p_expected_args = {"start": {"r": int, "g": int, "b": int}, "end": {"r": int, "g": int, "b": int}, "duration": int}
 
@@ -49,6 +49,7 @@ class WelcomeThread(threading.Thread):
             self.end_color = Color(rgb=(self.major_to_minor((end_r, end_g, end_b))))
 
             self.duration = json_args['duration']
+            self.disappear = bool(json_args['disappear'])
         except (KeyError, ValueError) as err:
             logger.error('Invalid or missing start/end RGB values')
             raise
@@ -71,11 +72,14 @@ class WelcomeThread(threading.Thread):
 
             sleep(iteration_length)
 
-        for i, col in enumerate(cols):
-            self.led_strip.setPixelColorRGB(i, *off)
-            self.led_strip.show()
+        if self.disappear {
+            for i, col in enumerate(cols):
+                self.led_strip.setPixelColorRGB(i, *off)
+                self.led_strip.show()
 
-            sleep(iteration_length)
+                sleep(iteration_length)
+        }
+
 
     def minor_to_major(self, rgb):
         """ Change RGB value of range from 0 - 1 to 0 - 255 """

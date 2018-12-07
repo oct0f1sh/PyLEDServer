@@ -40,7 +40,8 @@ class PyLEDClient(mqtt.Client):
                             "g": 255,
                             "b": 0
                         },
-                        "duration": 2
+                        "duration": 2,
+                        "disappear": True
                    }}
 
         # publish connection message to ensure successful connection
