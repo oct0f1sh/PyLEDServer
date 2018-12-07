@@ -4,7 +4,7 @@ import threading
 from time import sleep
 
 logger = logging.getLogger('pyledserver.plugins.LEDSolidColorThread')
-logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.INFO)
 
 class LEDSolidColorThread(threading.Thread):
     """ sets strip to one solid color """
