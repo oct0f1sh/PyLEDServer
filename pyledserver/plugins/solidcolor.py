@@ -30,7 +30,7 @@ class LEDSolidColorThread(threading.Thread):
             g = int(json_args['g'])
             b = int(json_args['b'])
         except (KeyError, ValueError) as err:
-            logger.error('Invalid or missing RGB values'.format(err))
+            logger.error('Invalid or missing RGB values')
             raise
 
         try:

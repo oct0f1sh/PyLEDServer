@@ -33,23 +33,31 @@ class WelcomeThread(threading.Thread):
 
     def __init__(self, led_strip, json_args):
         super(WelcomeThread, self).__init__()
+        self.should_stop = False
 
-        # try:
-        #     self.start = Color(major)
-        # except:
-            
+        try:
+            start_json = json_args['start']
+            start_r = start_json['r']
+            start_g = start_json['g']
+            start_b = start_json['b']
+            self.start_color = Color(rgb=(self.major_to_minor((start_r, start_g, start_b))))
+
+            end_json = json_args['end']
+            end_r = end_json['r']
+            end_g = end_json['g']
+            end_b = end_json['b']
+            self.end_color = Color(rgb=(self.major_to_minor((end_r, end_g, end_b))))
+        except (KeyError, ValueError) as err:
+            logger.error('Invalid or missing start/end RGB values')
 
         self.led_strip = led_strip
-        self.should_stop = False
 
     def run(self):
         seconds = 2
 
-        red = Color('red')
-        green = Color(rgb=(0,1,0))
         off = (0,0,0)
 
-        cols = list(red.range_to(green, self.led_strip.num_pixels))
+        cols = list(self.start_color.range_to(self.end_color, self.led_strip.num_pixels))
         iteration_length = seconds / self.led_strip.num_pixels
 
         logger.debug('Iteration length: {}'.format(iteration_length))
