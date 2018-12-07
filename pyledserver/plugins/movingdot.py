@@ -67,22 +67,22 @@ class MovingDotThread(threading.Thread):
 
         while not self.should_stop:
             if i == 0 and not forwards:
-                self.led_strip.setPixelColorRGB(i, *off)
+                self.led_strip.setPixelColorRGB(i + 1, *off)
                 self.led_strip.setPixelColorRGB(i, *color)
                 forwards = True
                 i += 1
             elif i == pixels - 1:
-                self.led_strip.setPixelColorRGB(i, *off)
+                self.led_strip.setPixelColorRGB(i - 1, *off)
                 self.led_strip.setPixelColorRGB(i, *color)
                 forwards = False
                 i -= 1
             else:
                 if forwards:
-                    self.led_strip.setPixelColorRGB(i, *off)
+                    self.led_strip.setPixelColorRGB(i - 1, *off)
                     self.led_strip.setPixelColorRGB(i, *color)
                     i += 1
                 else:
-                    self.led_strip.setPixelColorRGB(i, *off)
+                    self.led_strip.setPixelColorRGB(i + 1, *off)
                     self.led_strip.setPixelColorRGB(i, *color)
                     i -= 1
 
