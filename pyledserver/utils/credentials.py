@@ -28,9 +28,9 @@ class CredentialsContainer(object):
 
                     for line in f:
                         # if line is not a comment
-                        if '\#\#' not in line: 
+                        if '\#\#' not in line and line.isalnum: 
                             info = line.split('=')
-                            
+
                             try:
                                 descriptor = info[0]
                                 credential = info[1][:-1]
