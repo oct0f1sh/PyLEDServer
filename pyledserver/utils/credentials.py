@@ -2,7 +2,7 @@ import os.path
 import logging
 
 logger = logging.getLogger('pyledserver.User')
-logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.INFO)
 
 class CredentialsContainer(object):
     def __init__(self):
