@@ -22,6 +22,7 @@ class BaseStrip(object):
 
     def show(self):
         logger.debug('show method')
+        self.strip.show()
 
     def setPixelColor(self, n, color):
         logger.debug('setPixelColor method')
