@@ -2,7 +2,8 @@ import logging
 
 from strip.basestrip import BaseStrip
 
-logger = logging.getLogger('pyledserver.LEDStrip')
+# logger = logging.getLogger('pyledserver.LEDStrip')
+logger = logging.getLogger('pyledserver.Ufasdfr')
 logger.setLevel(logging.DEBUG)
 
 class LEDStrip(BaseStrip):
@@ -25,7 +26,6 @@ class LEDStrip(BaseStrip):
         self = neopixel.NeoPixel(led_pin, self.num_pixels, brightness=1, auto_write=False, pixel_order=order)
 
         logger.debug('Setting LED strip')
-        print('setting the led strip')
 
         self.fill((255, 0, 0))
 
