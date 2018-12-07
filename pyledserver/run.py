@@ -1,6 +1,10 @@
 import argparse
 import json
 import logging
+import sys
+
+# This is needed to support Raspberry Pi Zero
+sys.path.append('/home/pi/.local/lib/python3.5/site-packages')
 
 from mqtt.client import PyLEDClient
 from strip.ledstrip import LEDStrip

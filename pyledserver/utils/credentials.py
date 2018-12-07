@@ -30,8 +30,12 @@ class CredentialsContainer(object):
                         # if line is not a comment
                         if '\#\#' not in line: 
                             info = line.split('=')
-                            descriptor = info[0]
-                            credential = info[1][:-1]
+                            
+                            try:
+                                descriptor = info[0]
+                                credential = info[1][:-1]
+                            except IndexError as err:
+                                logger.error('Error parsing credentials: {}'.format(err))
 
                             if descriptor == 'mqtt_url':
                                 self.mqtt_url = credential
