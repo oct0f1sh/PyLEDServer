@@ -52,6 +52,8 @@ class CallbackContainer(object):
             logger.error('json missing message key')
             raise
 
+        # TODO: command keyword for setting brightness and other things
+
         try:
             args = json['args']
 

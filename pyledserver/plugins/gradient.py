@@ -64,6 +64,8 @@ class WelcomeThread(threading.Thread):
 
         logger.debug('Iteration length: {}'.format(iteration_length))
 
+        self.led_strip.brightness = 0.2
+
         for i, col in enumerate(cols):
             rgb = self.minor_to_major(col.rgb)
 

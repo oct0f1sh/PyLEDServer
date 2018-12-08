@@ -74,4 +74,4 @@ class RainbowThread(threading.Thread):
 
             self.led_strip.show()
 
-            sleep(iteration_length)
+        sleep(iteration_length)
