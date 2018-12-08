@@ -47,6 +47,9 @@ class RainbowThread(threading.Thread):
     def run(self):
         off = (0,0,0)
 
+        # TODO: REMOVE THIS
+        self.led_strip.setBrightness(0.2)
+
         rg = list(Color('red').range_to(Color('green'), self.led_strip.num_pixels))
         gb = list(Color('green').range_to(Color('blue'), self.led_strip.num_pixels))
         br = list(Color('blue').range_to(Color('red'), self.led_strip.num_pixels))

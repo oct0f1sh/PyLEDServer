@@ -58,8 +58,6 @@ class GradientThread(threading.Thread):
     def run(self):
         off = (0,0,0)
 
-        self.led_strip.setBrightness(0.2)
-
         cols = list(self.start_color.range_to(self.end_color, self.led_strip.num_pixels))
         iteration_length = self.duration / self.led_strip.num_pixels
 
