@@ -8,10 +8,9 @@ from colour import Color
 logger = logging.getLogger('pyledserver.plugins.LEDSolidColorThread')
 logger.setLevel(logging.INFO)
 
-class WelcomeThread(threading.Thread):
-    """ Feedback to show that LED strip has been initialized successfully.
-    Only called in client.py """
-    """ expected args (there are none)
+class GradientThread(threading.Thread):
+    """ Gradient between two colors """
+    """ expected args:
     {
         "start": {
             "r": int,
@@ -32,7 +31,7 @@ class WelcomeThread(threading.Thread):
     p_expected_args = {"start": {"r": int, "g": int, "b": int}, "end": {"r": int, "g": int, "b": int}, "duration": int}
 
     def __init__(self, led_strip, json_args):
-        super(WelcomeThread, self).__init__()
+        super(GradientThread, self).__init__()
         self.should_stop = False
 
         try:
@@ -58,6 +57,8 @@ class WelcomeThread(threading.Thread):
 
     def run(self):
         off = (0,0,0)
+
+        self.led_strip.setBrightness(0.2)
 
         cols = list(self.start_color.range_to(self.end_color, self.led_strip.num_pixels))
         iteration_length = self.duration / self.led_strip.num_pixels
