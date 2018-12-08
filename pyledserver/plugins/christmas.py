@@ -48,5 +48,5 @@ class ChristmasThread(threading.Thread):
 
             odd = not odd
             self.led_strip.show()
-            time.sleep(self.duration)
+            sleep(self.duration)
                 
