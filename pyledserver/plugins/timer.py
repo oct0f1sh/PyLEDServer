@@ -39,7 +39,7 @@ class TimerThread(threading.Thread):
 
         self.led_strip.setStripColorRGB(*green)
 
-        pixels = self.led_strip.num_pixels
+        pixels = self.led_strip.num_pixels - 1
 
         total_seconds = (self.minutes * 60) + self.seconds
         logger.debug('TOTAL SECONDS: {}'.format(total_seconds))

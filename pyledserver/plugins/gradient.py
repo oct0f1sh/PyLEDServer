@@ -27,7 +27,7 @@ class WelcomeThread(threading.Thread):
     }
     """
     p_identifier = 'gradient' # MUST NOT CONTAIN SPACES
-    p_name = 'Display a gradient between two colors'
+    p_name = 'Gradient'
     p_author = 'oct0f1sh'
     p_expected_args = {"start": {"r": int, "g": int, "b": int}, "end": {"r": int, "g": int, "b": int}, "duration": int}
 
