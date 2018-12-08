@@ -65,8 +65,9 @@ class RainbowThread(threading.Thread):
         i = 0
 
         for color in cycle(colors):
-            print(color)
-            self.led_strip.setPixelColorRGB(i, *color)
+            (r, g, b) = (i * 255 for i in color.rgb)
+            
+            self.led_strip.setPixelColorRGB(i, r, g, b)
 
             if i == self.led_strip.num_pixels - 1:
                 i = 0
