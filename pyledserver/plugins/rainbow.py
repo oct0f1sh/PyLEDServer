@@ -57,11 +57,6 @@ class RainbowThread(threading.Thread):
 
         logger.debug('Iteration length: {}'.format(iteration_length))
 
-        # for i, col in enumerate(cols):
-        #     self.led_strip.setPixelColorRGB(i, *rgb)
-        #     self.led_strip.show()
-
-        #     sleep(iteration_length)
         i = 0
 
         for color in cycle(colors):
@@ -79,10 +74,4 @@ class RainbowThread(threading.Thread):
 
             self.led_strip.show()
 
-
-    # def minor_to_major(self, rgb):
-    #     """ Change RGB value of range from 0 - 1 to 0 - 255 """
-    #     return (rgb[0] * 255, rgb[1] * 255, rgb[2] * 255)
-
-    # def major_to_minor(self, rgb):
-    #     return (rgb[0] / 255, rgb[1] / 255, rgb[2] / 255)
+            sleep(iteration_length)
